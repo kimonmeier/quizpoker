@@ -74,6 +74,7 @@ export default class App {
                             break;
                         
                         case GameMasterAction.NEXT_QUESTION:
+                            Cache.getInstance().saveFrage();
                             this.GameManager.flushChips();
 
                             Cache.getInstance().getAll().forEach((element) => {
@@ -144,7 +145,7 @@ export default class App {
                             break;
 
                         case GameMasterAction.SHOW_HINWEIS:
-                            const old_frage: Frage = Cache.getInstance().getLastFrage();
+                            const old_frage: Frage = Cache.getInstance().getLastFrage()!;
 
                             var hinweisToSend: string = "";
                             

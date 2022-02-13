@@ -16,6 +16,7 @@ export default class Cache {
     private clients: [number, ClientCache][] = [];
     private schaetzungen: [number, number][] = [];
     private fragen: Frage[] = [];
+    private currentFrage: Frage | null = null;
 
     private constructor() {
         this.loadFragen();
@@ -23,17 +24,31 @@ export default class Cache {
 
     public loadFragen(): void {
         fragen.forEach(x => {
-           console.log(x); 
-
+            this.fragen.push({
+                frage: x.Frage,
+                hinweis1: x.Hinweis_1,
+                hinweis2: x.Hinweis_2,
+                antwort: x.Antwort,
+                used: false
+            })
         });
     }
 
-    public getLastFrage(): Frage {
-        return this.getUnusedFragen();
+    public getLastFrage(): Frage | null {
+        return this.currentFrage;
+    }
+
+    public saveFrage(): void {
+        if (this.currentFrage == null) {
+            return;
+        }
+
+        const idx = this.fragen.findIndex(x => x == this.currentFrage) as number;
+        this.fragen[idx].used = true;
     }
 
     public getUnusedFragen(): Frage {
-        return { frage: "Frage 1", hinweis1: "Hinweis 1", hinweis2: "Hinweis 2", antwort: "Antwort", used: false }; 
+        return this.fragen.filter(x => !x.used)[0];
     }
 
     public getSchaetzungen(): [number, number][] {
