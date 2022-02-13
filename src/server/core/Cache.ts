@@ -1,5 +1,6 @@
 import WebSocketClient from "@server/connection/WebSocketClient";
 import { MemberStatus } from "@shared/message/ServerMessage";
+import * as fragen from "./frage.json";
 
 export default class Cache {
     private static instance: Cache;
@@ -17,11 +18,14 @@ export default class Cache {
     private fragen: Frage[] = [];
 
     private constructor() {
-        //this.loadFragen();
+        this.loadFragen();
     }
 
     public loadFragen(): void {
-        
+        fragen.forEach(x => {
+           console.log(x); 
+
+        });
     }
 
     public getLastFrage(): Frage {
