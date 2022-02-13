@@ -51,7 +51,9 @@ export default class Cache {
     }
 
     public getUnusedFragen(): Frage {
-        return this.fragen.filter(x => !x.used)[0];
+        const currentFrage = this.fragen.filter(x => !x.used)[0];;
+        this.currentFrage = currentFrage;
+        return currentFrage;
     }
 
     public getSchaetzungen(): [number, number][] {

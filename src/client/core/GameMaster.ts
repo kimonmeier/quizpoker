@@ -169,7 +169,7 @@ export default class GameMasterApp {
             case ServerEvents.UPDATED_MITGLIED_VALUES:
                 (document.getElementById("chips_" + m.id) as HTMLInputElement).value =  m.chips.toString();
                 (document.getElementById("einsatz_" + m.id) as HTMLInputElement).value =  m.einsatz.toString();
-                GameMasterApp.getInstance().teilnehmerTable.hideRowValue(m.id.toString(), "Kontrolle", !m.hasControls);
+                //GameMasterApp.getInstance().teilnehmerTable.hideRowValue(m.id.toString(), "Kontrolle", !m.hasControls);
 
                 if(m.status == MemberStatus.PLEITE) {
                     GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Kontrolle", "Pleite", true);
