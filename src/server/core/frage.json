@@ -1,14 +1,38 @@
 [
     {
-        "Frage": "Frage",
-        "Hinweis_1": "Hinweis",
-        "Hinweis_2": "Hinweis",
-        "Antwort": "Antwort"
+        "Frage": "Mit welcher Geschwindigkeit dreht sich die Erde am Äquator um die eigene Achse?",
+        "Hinweis_1": "Der umfang der Erde beträgt am Äquator 40.075 km",
+        "Hinweis_2": "Würde man direkt auf dem Äquator stehen, würde man sich mit einer Geschwindigkeit von 464 Metern pro Sekunde bewegen",
+        "Antwort": "1.673 km/h"
     },
     {
-        "Frage": "Frage",
-        "Hinweis_1": "Hinweis",
-        "Hinweis_2": "Hinweis",
-        "Antwort": "Antwort"
+        "Frage": "Wann began der Bau der Berliner Mauer?",
+        "Hinweis_1": "In diesem Jahr wurde John F. Kennedy der 35. Präsident der USA.",
+        "Hinweis_2": "In diesem Jahr ist Armin Laschet geboren.",
+        "Antwort": "1961"
+    },
+    {
+        "Frage": "Wie viele Menschen sprechen Russisch als Muttersprache?",
+        "Hinweis_1": "Real Madrid bot PSG im Sommer diese Zahl als Ablösesumme für Kylian Mbappé welches abgelehnt wurde.",
+        "Hinweis_2": "Würden in Bangladesch ca. 3 Millionen weniger Einwohner leben, dann könnten alle Einwohner russisch sprechen.",
+        "Antwort": "160 Millionen"
+    },
+    {
+        "Frage": "Was ist die Spiellänge von Avengers: Endgame?",
+        "Hinweis_1": "Umgerechnet in Tagen sind es 0,126 Tage.",
+        "Hinweis_2": "Während der Fahrt von Köln nach Hannover könnte man den gesamten Film sehen.",
+        "Antwort": "182 Minuten"
+    },
+    {
+        "Frage": "Wie viele Filme gibt es auf Netflix?",
+        "Hinweis_1": "Es gibt halb so viele Serien wie Filme auf Netflix",
+        "Hinweis_2": "Wäre diese Zahl des Monatsbrutto so wäre das Jahresnetto 28357 Euro.",
+        "Antwort": "3800"
+    },
+    {
+        "Frage": "Seit wann ist Putin Präsident von Russland?",
+        "Hinweis_1": "Das erfolgreichste Lied in diesem Jahr war Mambo No. 5",
+        "Hinweis_2": "Die größte Sorge der meisten IT-ler war Silvester.",
+        "Antwort": "1999"
     }
 ]
