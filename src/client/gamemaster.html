@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Gameshow</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    </head>
+    <body class="bg-dark">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <div id="tables" class="container">
+            <table id="fragenTable" class="bg-dark text-white">
+                <tbody>
+
+                </tbody>
+            </table>
+            <br>
+            <div class="inline">
+                <button id="btnNextQuestion" class="btn btn-primary">Nächste Frage</button>
+            </div>
+            <hr>
+            <table id="teilnehmnerTable" class="bg-dark text-white">
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+        <div id="game-controls">
+            <button id="btnStartGame" class="btn btn-success bg-dark text-white">Start Game!</button>
+        </div>
+
+        
+
+        <div hidden>
+            <div id="login" class="container p-5">
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2">Name:</label>
+                    <input type="text" class="form-control col" id="name"/>
+                </div>
+                <div class="form-group row">
+                    <button id="btnLogin" class="btn btn-success col">Einloggen!</button>
+                </div>
+                <div id="loginAlert" hidden class="alert alert-success">
+                    Du hast dich erfolgreich eingeloggt!
+                </div>
+            </div>
+    
+            <div id="play" hidden class="container">
+                <div class="row m-5">
+                    <table id="teilnehmer" class="table"></table>
+                </div>
+                <hr>
+                <div class="row m-5">
+                    <table id="fragen" class="table"></table>
+                </div>
+                <div id="schaetzung" hidden class="row">
+                    <label class="col-sm-1 m-2 text-right" for="schaetzungText">Schätzung:</label>
+                    <input type="text" id="schaetzungText" class="col m-2 form-control"/>
+                    <button id="btnSubmitSchaetzung" class="col-sm-1 m-2 btn btn-success"/>Submit</button>
+                </div>
+                <div id="game-controls">
+                    <div id="raise" class="row">
+                        <label class="col-sm-1 text-right" for="raiserange">Raise:</label>
+                        <input type="range" id="raiserange" class="col form-control m-2 range" step="50" min="50" max="10000" value="0"/>
+                        <input type="text" id="raisetext" class="col form-control m-2 text" value="0"/>
+                    </div>
+                    <div id="controls" class="row">
+                        <button id="btnRaise" class="col btn btn-primary">Raise</button>
+                        <button id="btnCall" class="col btn btn-primary">Call</button>
+                        <button id="btnFold" class="col btn btn-danger">Fold</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="./core/GameMaster.ts"></script>
+    </body>
+</html>
