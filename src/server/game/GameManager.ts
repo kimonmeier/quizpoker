@@ -36,6 +36,10 @@ export default class GameManager {
         this.bets = [];
     }
 
+    public clearBetFromPlayer(id: number): void {
+        this.bets = this.bets.filter(x => x.player_id != id);
+    }
+
     public getRemainingChips(userId: number): number {
         return Cache.getInstance().getClientCacheById(userId)!.chips - this.getBetValues(userId);
     }

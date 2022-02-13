@@ -200,10 +200,10 @@ export default class App {
     }
 
     private setLastBet(lastBet: number): void {
-        this.lastBet = lastBet; 
+        App.getInstance().lastBet = lastBet; 
 
-        this.raiseRangeInput.min = lastBet.toString();
-        this.raiseTextInput.textContent = lastBet.toString();
+        App.getInstance().raiseRangeInput.min = (lastBet + 50).toString();
+        App.getInstance().raiseTextInput.value = (lastBet + 50).toString();
     }
 
     private setPot(pot: number): void{
@@ -217,13 +217,13 @@ export default class App {
     }
 
     private setHasControls(setHasControls: boolean, minimumBet: number): void {
-        this.isInControl = setHasControls;
+        App.getInstance().isInControl = setHasControls;
 
-        if(this.isInControl) {
-            this.setLastBet(minimumBet);
+        if(App.getInstance().isInControl) {
+            App.getInstance().setLastBet(minimumBet);
         }
 
-        this.disableInputs(!this.isInControl);
+        App.getInstance().disableInputs(!App.getInstance().isInControl);
     }
 
     private getRole(role: PlayerRole): string {
@@ -284,10 +284,16 @@ export default class App {
                     App.getInstance().setMaxChips(m.chips);
                     App.getInstance().status = m.status;
                     App.getInstance().setHasControls(m.hasControls, 0);
-                } else {
-                    App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
-                    App.getInstance().table.editRowValueByValue(m.id.toString(), "EInsatz", m.einsatz.toString())
                 }
+
+                App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
+                App.getInstance().table.editRowValueByValue(m.id.toString(), "Einsatz", m.einsatz.toString())
+
+                if(m.status == MemberStatus.PLEITE) {
+                    App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", "Pleite");
+                    App.getInstance().table.editRowValueByValue(m.id.toString(), "Einsatz", "");
+                }
+
                 break;
 
             case ServerEvents.UPDATED_GAME_VALUES:
@@ -327,7 +333,7 @@ export default class App {
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();
                 break;
-                
+
             case ServerEvents.ROLES_SELECTED:
                 App.getInstance().clearRoles();
 

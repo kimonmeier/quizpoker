@@ -64,7 +64,9 @@ export default class GameMasterApp {
             { name: "Einsatz" },
             { name: "Schätzung" },
             { name: "Rolle", width: "col-sm-1" },
-            { name: "Kontrolle", width: "col-sm-1" }
+            { name: "Kontrolle", width: "col-sm-1" },
+            { name: "Update", width: "col-sm-1" },
+            { name: "Won", width: "col-sm-1" }
         );
     }
 
@@ -127,17 +129,35 @@ export default class GameMasterApp {
                 GameMasterApp.getInstance().teilnehmerTable.addRow(
                     m.id.toString(),
                     { value: m.name },
-                    { value: "10000" },
-                    { value: "0" },
+                    { value: "10000", isTextbox: true, id: "chips_" + m.id.toString() },
+                    { value: "0", isTextbox: true, id: "einsatz_" + m.id.toString() },
                     { value: "" },
                     { value: "" },
-                    { value: "Controls", isButton: true, click: () => {
+                    { value: "Kontrolle", isButton: true, click: () => {
                         GameMasterApp.getInstance().client.send({
                             type: ClientEvents.GAME_MASTER_ACTION,
                             action: GameMasterAction.CONTROLS_SELECTED,
                             member_id: m.id
                         });
                         console.log("Der Member hat die Kontrolle bekommen!");
+                    }},
+                    { value: "Update", isButton: true, click: () => {
+                        GameMasterApp.getInstance().client.send({
+                            type: ClientEvents.GAME_MASTER_ACTION,
+                            action: GameMasterAction.UPDATE_MEMBER,
+                            member_id: m.id,
+                            chips: Number.parseInt((document.getElementById("chips_" + m.id.toString()) as HTMLInputElement).value),
+                            einsatz: Number.parseInt((document.getElementById("einsatz_" + m.id.toString()) as HTMLInputElement).value)
+                        });
+                        console.log("Es wurde die Values geupdated von einem der Clients");
+                    }},
+                    { value: "Win", isButton: true, click: () => {
+                        GameMasterApp.getInstance().client.send({
+                            type: ClientEvents.GAME_MASTER_ACTION,
+                            action: GameMasterAction.WON_GAME,
+                            member_id: m.id
+                        });
+                        console.log("Jemand wurde zum Gewinner gekürt!");
                     }}
                 );
                 break;
@@ -147,8 +167,8 @@ export default class GameMasterApp {
                 break;
                 
             case ServerEvents.UPDATED_MITGLIED_VALUES:
-                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
-                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Einsatz", m.einsatz.toString());
+                (document.getElementById("chips_" + m.id) as HTMLInputElement).value =  m.chips.toString();
+                (document.getElementById("einsatz_" + m.id) as HTMLInputElement).value =  m.einsatz.toString();
                 GameMasterApp.getInstance().teilnehmerTable.hideRowValue(m.id.toString(), "Kontrolle", !m.hasControls);
 
                 if(m.status == MemberStatus.PLEITE) {

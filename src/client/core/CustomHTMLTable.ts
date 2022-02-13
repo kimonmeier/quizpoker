@@ -48,7 +48,9 @@ export default class CustomHTMLTable {
 
                 if(element.isButton) {
                     cell.innerHTML = "<button class=\"btn btn-primary m-2\">" + element.value + "</button>";
-                } else {
+                } else if (element.isTextbox) {
+                    cell.innerHTML = "<input type=\"text\" id=\"" + element.id + "\" value=\"" + element.value + "\"> </input>";
+                }else {
                     cell.innerHTML = element.value;
                 }
 
@@ -215,5 +217,7 @@ export interface TableHeader {
 export interface RowHeader {
     value: string,
     isButton?: boolean,
+    isTextbox?: boolean,
+    id?: string,
     click?: ((this: GlobalEventHandlers, ev: MouseEvent) => any)
 }

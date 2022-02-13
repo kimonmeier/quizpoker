@@ -37,14 +37,18 @@ interface GameMasterActionEvent {
     action: GameMasterAction,
     member_id?: number,
     last_member?: number,
-    phase?: FragenPhase
+    phase?: FragenPhase,
+    chips?: number,
+    einsatz?: number;
 }
 
 export enum GameMasterAction {
     CONTROLS_SELECTED,
     NEXT_QUESTION,
     SHOW_HINWEIS,
-    START_GAME
+    START_GAME,
+    WON_GAME,
+    UPDATE_MEMBER,
 }
 
 export enum MemberAction {
