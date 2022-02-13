@@ -5,6 +5,7 @@ import { ClientEvents } from "@shared/enums/ClientEvents";
 import { ServerEvents } from "@shared/enums/ServerEvents";
 import { ClientMessage, GameMasterAction, MemberAction } from "@shared/message/ClientMessage";
 import { FragenPhase, MemberStatus } from "@shared/message/ServerMessage";
+import { runInThisContext } from "vm";
 import Cache, { Frage } from "./Cache";
 
 export default class App {
@@ -68,9 +69,11 @@ export default class App {
                             break;
                         
                         case GameMasterAction.NEXT_QUESTION:
+                            this.GameManager.flushChips();
+
                             Cache.getInstance().getAll().forEach((element) => {
 
-                                if(element[1].chips <= 0) { //TODO: Small und BigBlinds) {
+                                if(element[1].chips <= 0) {
                                     element[1].status = MemberStatus.PLEITE;
                                     Cache.getInstance().updateClient(element[0], element[1]);
                                 }
@@ -88,6 +91,8 @@ export default class App {
                             let frage = Cache.getInstance().getUnusedFragen();
                             this.GameManager.clearBets();
 
+                            this.GameManager.forwardRoles();
+
                             client.send({
                                 type: ServerEvents.GAME_MASTER_QUESTION,
                                 answer: frage.antwort,
@@ -103,6 +108,34 @@ export default class App {
                                 frage: frage.frage,
                                 phase: FragenPhase.FRAGE
                             })
+
+                            this.WebSocket.broadcast({
+                                type: ServerEvents.ROLES_SELECTED,
+                                big_blind: this.GameManager.getBigBlind(),
+                                small_blind: this.GameManager.getSmallBlind()
+                            });
+
+                            this.GameManager.addBet({ bet: 100, player_id: this.GameManager.getSmallBlind() });
+                            this.GameManager.addBet({ bet: 200, player_id: this.GameManager.getBigBlind() });
+
+                            this.WebSocket.broadcast({
+                                type: ServerEvents.UPDATED_MITGLIED_VALUES,
+                                chips: this.GameManager.getRemainingChips(this.GameManager.getSmallBlind()),
+                                einsatz: this.GameManager.getBetValues(this.GameManager.getSmallBlind()),
+                                hasControls: false,
+                                id: this.GameManager.getSmallBlind(),
+                                status: MemberStatus.ON
+                            });
+
+                            this.WebSocket.broadcast({
+                                type: ServerEvents.UPDATED_MITGLIED_VALUES,
+                                chips: this.GameManager.getRemainingChips(this.GameManager.getBigBlind()),
+                                einsatz: this.GameManager.getBetValues(this.GameManager.getBigBlind()),
+                                hasControls: false,
+                                id: this.GameManager.getBigBlind(),
+                                status: MemberStatus.ON
+                            });
+
                             break;
 
                         case GameMasterAction.SHOW_HINWEIS:
@@ -136,6 +169,8 @@ export default class App {
                             this.WebSocket.broadcast({
                                 type: ServerEvents.GAME_STARTED
                             });
+
+                            this.GameManager.initRoles();
 
                             break;
                     }

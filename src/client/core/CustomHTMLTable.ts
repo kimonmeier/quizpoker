@@ -97,8 +97,8 @@ export default class CustomHTMLTable {
         return rowToReturn;
     }
 
-    public editRowValue(rowId: string, cellName: string, newValue: string, disabledOnClick: boolean = false) {
-        const row: HTMLTableRowElement | null = this.getRowByValue(rowId);
+    public editRowValueByValue(rowId: string, cellName: string, newValue: string, disabledOnClick: boolean = false) {
+        var row: HTMLTableRowElement | null = this.getRowByValue(rowId);
 
         if(row == null) {
             return;
@@ -120,6 +120,29 @@ export default class CustomHTMLTable {
         }
     }
     
+    public editRowValueByIdx(rowIdx: number, cellName: string, newValue: string, disabledOnClick: boolean = false) {
+        var row: HTMLTableRowElement | null = this.getRow(rowIdx);
+
+        if(row == null) {
+            return;
+        }
+
+        let cellIndex: number = -1;
+        this.headers.forEach((value) => {
+            if(value[1] == cellName) {
+                cellIndex = value[0];
+            }
+        })
+
+        if(cellIndex == -1) {
+            return;
+        }
+        row.cells[cellIndex].innerHTML = newValue;
+        if(disabledOnClick) {
+            row.cells[cellIndex].onclick = null;
+        }
+    }
+
     public hideRowValue(rowId: string, cellName: string, visible: boolean): void {
         const row: HTMLTableRowElement | null = this.getRowByValue(rowId);
 

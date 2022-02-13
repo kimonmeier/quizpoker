@@ -1,3 +1,4 @@
+import { PlayerRole } from "@shared/enums/PlayerRole";
 import { ServerEvents } from "@shared/enums/ServerEvents";
 
 interface PingServerEvent {
@@ -78,6 +79,12 @@ interface PlayerControlEvent {
     minimumBet: number;
 }
 
+interface PlayerRolesSelectedEvent {
+    type: ServerEvents.ROLES_SELECTED,
+    small_blind: number,
+    big_blind: number;
+}
+
 export enum FragenPhase {
     FRAGE = "Frage",
     RUNDE_1 = "Hinweis_1",
@@ -98,4 +105,4 @@ export enum MemberStatus {
 }
 
 
-export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent;
+export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerRolesSelectedEvent;

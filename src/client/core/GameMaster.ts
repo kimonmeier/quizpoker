@@ -1,3 +1,4 @@
+import { PlayerRole } from "../../shared/enums/PlayerRole";
 import { ClientEvents } from "../../shared/enums/ClientEvents";
 import { ServerEvents } from "../../shared/enums/ServerEvents";
 import { GameMasterAction } from "../../shared/message/ClientMessage";
@@ -62,6 +63,7 @@ export default class GameMasterApp {
             { name: "Chips" },
             { name: "Einsatz" },
             { name: "Schätzung" },
+            { name: "Rolle", width: "col-sm-1" },
             { name: "Kontrolle", width: "col-sm-1" }
         );
     }
@@ -84,6 +86,35 @@ export default class GameMasterApp {
         }
     }
 
+    private getRole(role: PlayerRole): string {
+        const element = document.createElement('div') as HTMLDivElement;
+
+        switch(role) {
+            case PlayerRole.SMALL_BLIND:
+                element.textContent = "Small Blind";
+                element.classList.add("alert");
+                element.classList.add("alert-warning")
+                break;
+            case PlayerRole.BIG_BLIND:
+                element.textContent = "Big Blind";
+                element.classList.add("alert");
+                element.classList.add("alert-success")
+                break;
+        }
+
+        return element.outerHTML;
+    }
+
+    private clearRoles(): void {
+        for(var i = 0; true; i++) {
+            if(GameMasterApp.getInstance().teilnehmerTable.getRow(i) == undefined) {
+                break;
+            }
+
+            GameMasterApp.getInstance().teilnehmerTable.editRowValueByIdx(i, "Rolle", "");
+        }
+    }
+
     private recieve(m: ServerMessage): void {
         switch(m.type) {
             case ServerEvents.PING:
@@ -98,6 +129,7 @@ export default class GameMasterApp {
                     { value: m.name },
                     { value: "10000" },
                     { value: "0" },
+                    { value: "" },
                     { value: "" },
                     { value: "Controls", isButton: true, click: () => {
                         GameMasterApp.getInstance().client.send({
@@ -115,12 +147,12 @@ export default class GameMasterApp {
                 break;
                 
             case ServerEvents.UPDATED_MITGLIED_VALUES:
-                GameMasterApp.getInstance().teilnehmerTable.editRowValue(m.id.toString(), "Chips", m.chips.toString());
-                GameMasterApp.getInstance().teilnehmerTable.editRowValue(m.id.toString(), "Einsatz", m.einsatz.toString());
+                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
+                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Einsatz", m.einsatz.toString());
                 GameMasterApp.getInstance().teilnehmerTable.hideRowValue(m.id.toString(), "Kontrolle", !m.hasControls);
 
                 if(m.status == MemberStatus.PLEITE) {
-                    GameMasterApp.getInstance().teilnehmerTable.editRowValue(m.id.toString(), "Kontrolle", "Pleite", true);
+                    GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Kontrolle", "Pleite", true);
                 }
                 break;
 
@@ -129,10 +161,12 @@ export default class GameMasterApp {
                 break;
 
             case ServerEvents.MEMBER_ISSUED_SCHAETZUNG:
-                GameMasterApp.getInstance().teilnehmerTable.editRowValue(m.id.toString(), "Schätzung", m.schaetzung);
+                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Schätzung", m.schaetzung);
                 break;
 
             case ServerEvents.GAME_MASTER_QUESTION:
+                GameMasterApp.getInstance().fragenTable.clearRows();
+
                 GameMasterApp.getInstance().fragenTable.addRow(
                     "Frage",
                     { value: "Frage" },
@@ -184,6 +218,13 @@ export default class GameMasterApp {
                         });
                     }}
                 );
+                break;
+
+            case ServerEvents.ROLES_SELECTED: 
+                GameMasterApp.getInstance().clearRoles(),
+
+                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.small_blind.toString(), "Rolle", GameMasterApp.getInstance().getRole(PlayerRole.SMALL_BLIND));
+                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.big_blind.toString(), "Rolle", GameMasterApp.getInstance().getRole(PlayerRole.BIG_BLIND));
                 break;
         }
     }

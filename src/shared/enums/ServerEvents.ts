@@ -25,4 +25,6 @@ export enum ServerEvents {
     GAME_MASTER_QUESTION,
 
     MEMBER_ISSUED_SCHAETZUNG,
+
+    ROLES_SELECTED
 }

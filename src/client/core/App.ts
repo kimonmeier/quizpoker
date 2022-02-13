@@ -1,3 +1,4 @@
+import { PlayerRole } from "../../shared/enums/PlayerRole";
 import { ClientEvents } from "../../shared/enums/ClientEvents";
 import { ServerEvents } from "../../shared/enums/ServerEvents";
 import { MemberAction } from "../../shared/message/ClientMessage";
@@ -72,7 +73,8 @@ export default class App {
         this.table.addHeaders(
             { name: "Name"},
             { name: "Chips" },
-            { name: "Einsatz" }
+            { name: "Einsatz" },
+            { name: "Rolle", width: "col-sm-1" }
         );
         
         this.fragenTable = new CustomHTMLTable("fragen");
@@ -217,6 +219,35 @@ export default class App {
         this.disableInputs(!this.isInControl);
     }
 
+    private getRole(role: PlayerRole): string {
+        const element = document.createElement('div') as HTMLDivElement;
+
+        switch(role) {
+            case PlayerRole.SMALL_BLIND:
+                element.textContent = "Small Blind";
+                element.classList.add("alert");
+                element.classList.add("alert-warning")
+                break;
+            case PlayerRole.BIG_BLIND:
+                element.textContent = "Big Blind";
+                element.classList.add("alert");
+                element.classList.add("alert-success")
+                break;
+        }
+
+        return element.outerHTML;
+    }
+
+    private clearRoles(): void {
+        for(var i = 0; true; i++) {
+            if(App.getInstance().table.getRow(i) == undefined) {
+                break;
+            }
+
+            App.getInstance().table.editRowValueByIdx(i, "Rolle", "");
+        }
+    }
+
     private recieve(m: ServerMessage): void {
         console.log("Neue Nachricht vom Server");
         console.log(m);        
@@ -229,7 +260,7 @@ export default class App {
                 
             case ServerEvents.NEW_MITGLIED:
                 console.log("Neues Mitglied beigetreten!");
-                App.getInstance().table.addRow(m.id.toString(), m.name, "10000", "0");
+                App.getInstance().table.addRow(m.id.toString(), m.name, "10000", "0", App.getInstance().getRole(PlayerRole.PLAYER));
                 break;
 
             case ServerEvents.REMOVED_MITGLIED:
@@ -238,13 +269,13 @@ export default class App {
                 break;
                 
             case ServerEvents.UPDATED_MITGLIED_VALUES:
-                if(m.id == this.id) {
+                if(m.id == App.getInstance().id) {
                     App.getInstance().setMaxChips(m.chips);
                     App.getInstance().status = m.status;
                     App.getInstance().setHasControls(m.hasControls);
                 } else {
-                    App.getInstance().table.editRowValue(m.id.toString(), "Chips", m.chips.toString());
-                    App.getInstance().table.editRowValue(m.id.toString(), "EInsatz", m.einsatz.toString())
+                    App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
+                    App.getInstance().table.editRowValueByValue(m.id.toString(), "EInsatz", m.einsatz.toString())
                 }
                 break;
 
@@ -261,6 +292,7 @@ export default class App {
                     App.getInstance().fragenTable.addRow(m.phase, m.phase.replace("_", ""), m.hinweis);
                 } else {
                     App.getInstance().fragenTable.clearRows();
+                    App.getInstance().clearRoles();
                 }
                 break;
 
@@ -281,6 +313,12 @@ export default class App {
 
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();
+                break;
+            case ServerEvents.ROLES_SELECTED:
+                App.getInstance().clearRoles();
+
+                App.getInstance().table.editRowValueByValue(m.small_blind.toString(), "Rolle", App.getInstance().getRole(PlayerRole.SMALL_BLIND));
+                App.getInstance().table.editRowValueByValue(m.big_blind.toString(), "Rolle", App.getInstance().getRole(PlayerRole.BIG_BLIND));
                 break;
         }
     }
