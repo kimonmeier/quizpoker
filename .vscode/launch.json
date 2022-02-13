@@ -7,7 +7,7 @@
         "name": "Launch Program",
         "skipFiles": ["<node_internals>/**"],
         "program": "${workspaceFolder}/dist/server/index.js",
-        "outFiles": ["${workspaceFolder}/build/**/*.js"],
+        "outFiles": ["${workspaceFolder}/dist/**/*.js"],
         "env": { "NODE_ENV": "development" },
         "resolveSourceMapLocations": [
           "${workspaceFolder}/**",
