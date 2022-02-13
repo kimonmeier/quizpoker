@@ -144,7 +144,7 @@ export default class App {
             this.client.send({
                 type: ClientEvents.MITGLIED_ACTION,
                 action: MemberAction.RAISE,
-                value: Number.parseInt(this.schaetzungTextInput.value)
+                value: Number.parseInt(this.raiseTextInput.value)
             })
         }
 
