@@ -23,15 +23,18 @@ export default class Cache {
     }
 
     public loadFragen(): void {
-        fragen.forEach(x => {
+        for(const element in fragen) {
+            const current = fragen[element];
+
             this.fragen.push({
-                frage: x.Frage,
-                hinweis1: x.Hinweis_1,
-                hinweis2: x.Hinweis_2,
-                antwort: x.Antwort,
+                frage: current.Frage,
+                hinweis1: current.Hinweis_1,
+                hinweis2: current.Hinweis_2,
+                antwort: current.Antwort,
                 used: false
             })
-        });
+        }
+            
     }
 
     public getLastFrage(): Frage | null {
