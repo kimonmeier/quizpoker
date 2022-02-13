@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Eine Gameshowwebseite welche über Websockets funktioniert",
   "scripts": {
-    "client:dev": "parcel ./src/client/index.html",
-    "client:build": "parcel build ./src/client/index.html",
-    "server:dev": "npx nodemon --watch './src/**/*.ts' --exec 'ts-node' ./src/server/index.ts"
+    "client:dev": "parcel ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
+    "client:build": "parcel build ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
+    "server:dev": "npx nodemon "
   },
   "repository": {
     "type": "git",

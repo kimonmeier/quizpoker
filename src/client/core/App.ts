@@ -52,7 +52,7 @@ export default class App {
         this.disableInputs(true);
         this.disableSchaetzungen(true, false);
 
-        this.client = new WebSocketClient("wss://server01.k-meier.ch");
+        this.client = new WebSocketClient("ws://localhost:2222");
 
         this.client.recieve = this.recieve;
     }
