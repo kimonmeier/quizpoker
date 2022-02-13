@@ -276,7 +276,7 @@ export default class App {
                 break;
             
             case ServerEvents.PLAYER_HAS_CONTROLS:
-                App.getInstance().setHasControls(m.member_id == this.id);
+                App.getInstance().setHasControls(m.member_id == App.getInstance().id);
                 // TODO: Player farbig markieren!
 
             case ServerEvents.GAME_STARTED:

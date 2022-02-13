@@ -5,7 +5,8 @@
   "scripts": {
     "client:dev": "parcel ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
     "client:build": "parcel build ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
-    "server:dev": "npx nodemon "
+    "server:dev": "npx nodemon ",
+    "server:build": "tsc --project tsconfig.json && npx tscpaths -p tsconfig.json -s ./src -o ./dist"
   },
   "repository": {
     "type": "git",
