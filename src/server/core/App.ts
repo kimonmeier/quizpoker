@@ -235,7 +235,7 @@ export default class App {
                             
                             break;
                         case MemberAction.RAISE:
-                            newBet.bet += message.value;
+                            newBet.bet = message.value;
                             this.GameManager.addBet(newBet); 
 
                             this.WebSocket.broadcast({
