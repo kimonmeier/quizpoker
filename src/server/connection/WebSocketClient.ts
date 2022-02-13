@@ -1,5 +1,5 @@
 import { ServerMessage } from "@shared/message/ServerMessage";
-import uuid from "uuid";
+import * as uuid from 'uuid';
 import WebSocket from "ws";
 import Client from "./Client";
 
