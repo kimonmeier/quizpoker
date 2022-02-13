@@ -259,6 +259,10 @@ export default class App {
                 break;
                 
             case ServerEvents.NEW_MITGLIED:
+                if(App.getInstance().table.getRowByValue(m.id.toString()) != null) {
+                    return;
+                }
+
                 console.log("Neues Mitglied beigetreten!");
                 App.getInstance().table.addRow(m.id.toString(), m.name, "10000", "0", App.getInstance().getRole(PlayerRole.PLAYER));
                 break;
@@ -322,7 +326,4 @@ export default class App {
                 break;
         }
     }
-
-
-
 }
