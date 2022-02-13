@@ -201,6 +201,9 @@ export default class App {
 
     private setLastBet(lastBet: number): void {
         this.lastBet = lastBet; 
+
+        this.raiseRangeInput.min = lastBet.toString();
+        this.raiseTextInput.textContent = lastBet.toString();
     }
 
     private setPot(pot: number): void{
@@ -213,8 +216,12 @@ export default class App {
         this.raiseRangeInput.max = maxChips.toString();
     }
 
-    private setHasControls(setHasControls: boolean): void {
+    private setHasControls(setHasControls: boolean, minimumBet: number): void {
         this.isInControl = setHasControls;
+
+        if(this.isInControl) {
+            this.setLastBet(minimumBet);
+        }
 
         this.disableInputs(!this.isInControl);
     }
@@ -276,7 +283,7 @@ export default class App {
                 if(m.id == App.getInstance().id) {
                     App.getInstance().setMaxChips(m.chips);
                     App.getInstance().status = m.status;
-                    App.getInstance().setHasControls(m.hasControls);
+                    App.getInstance().setHasControls(m.hasControls, 0);
                 } else {
                     App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
                     App.getInstance().table.editRowValueByValue(m.id.toString(), "EInsatz", m.einsatz.toString())
@@ -307,17 +314,20 @@ export default class App {
                     App.getInstance().disableSchaetzungen(false, true);
                 }
                 
+                App.getInstance().table.unhighlightRows();
                 App.getInstance().fragenTable.clearRows();
                 App.getInstance().fragenTable.addRow(m.phase, m.phase.replace("_", ""), m.frage);
                 break;
             
             case ServerEvents.PLAYER_HAS_CONTROLS:
-                App.getInstance().setHasControls(m.member_id == App.getInstance().id);
+                App.getInstance().setHasControls(m.member_id == App.getInstance().id, m.minimumBet);
+                App.getInstance().table.highlightRowByValue(m.member_id.toString());
                 // TODO: Player farbig markieren!
 
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();
                 break;
+                
             case ServerEvents.ROLES_SELECTED:
                 App.getInstance().clearRoles();
 

@@ -164,7 +164,12 @@ export default class GameMasterApp {
                 GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Schätzung", m.schaetzung);
                 break;
 
+            case ServerEvents.PLAYER_HAS_CONTROLS:
+                GameMasterApp.getInstance().teilnehmerTable.highlightRowByValue(m.member_id.toString());
+                break;
+
             case ServerEvents.GAME_MASTER_QUESTION:
+                GameMasterApp.getInstance().teilnehmerTable.unhighlightRows();
                 GameMasterApp.getInstance().fragenTable.clearRows();
 
                 GameMasterApp.getInstance().fragenTable.addRow(

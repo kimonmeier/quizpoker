@@ -82,6 +82,25 @@ export default class CustomHTMLTable {
         return tableBody.rows[index];
     }
 
+    public getRows(): HTMLTableRowElement[] {
+        var tableBody = this.htmlTable.tBodies[0];
+        
+        const rows: HTMLTableRowElement[] = [];
+        for (let index = 0; true; index++) {
+            const element = tableBody.rows[index];
+            if(element == undefined) {
+                break;
+            }
+
+            rows.push(element);
+        }
+        return rows;
+    }
+
+    public getValueByRow(row: HTMLTableRowElement): string {
+        return row.classList[0];
+    }
+
     public getRowByValue(value: string): HTMLTableRowElement | null {
         var rowToReturn: HTMLTableRowElement | null = null;
         const tableBody = this.htmlTable.tBodies[0];
@@ -162,6 +181,24 @@ export default class CustomHTMLTable {
         }
 
         row.cells[cellIndex].hidden = !visible;
+    }
+
+    public highlightRowByValue(rowId: string): void {
+        this.getRows().forEach(element => {
+            this.unhighlightRowByValue(this.getValueByRow(element));
+        });
+
+        this.getRowByValue(rowId)?.classList.add("highlight");
+    }
+
+    public unhighlightRows(): void {
+        this.getRows().forEach(element => { 
+            this.unhighlightRowByValue(this.getValueByRow(element));
+        });
+    }
+
+    public unhighlightRowByValue(rowId: string): void {
+        this.getRowByValue(rowId)?.classList.remove("highlight");
     }
 }
 
