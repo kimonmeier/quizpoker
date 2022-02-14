@@ -184,7 +184,7 @@ export default class App {
                             if(this.GameManager.getRemainingChips(message.member_id!) != message.chips) {
                                 const updateClient = Cache.getInstance().getClientCacheById(message.member_id!)!;
 
-                                updateClient.chips = message.chips! - this.GameManager.getBetValues(message.member_id!);
+                                updateClient.chips = message.chips!;
 
                                 Cache.getInstance().updateClient(message.member_id!, updateClient);
                             }
@@ -222,6 +222,7 @@ export default class App {
 
                     switch(message.action) {
                         case MemberAction.CALL:
+                            newBet.bet = lastBet.bet - this.GameManager.getBetValues(userId);
                             this.GameManager.addBet(newBet);
 
                             this.WebSocket.broadcast({
@@ -235,7 +236,7 @@ export default class App {
                             
                             break;
                         case MemberAction.RAISE:
-                            newBet.bet = message.value;
+                            newBet.bet = message.value - lastBet.bet;
                             this.GameManager.addBet(newBet); 
 
                             this.WebSocket.broadcast({
