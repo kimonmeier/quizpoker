@@ -64,14 +64,14 @@ export default class App {
                 case ClientEvents.GAME_MASTER_ACTION:
                     switch(message.action) {
                         case GameMasterAction.CONTROLS_SELECTED:
-                            this.WebSocket.broadcast({
-                                type: ServerEvents.PLAYER_HAS_CONTROLS,
-                                member_id: message.member_id as number,
-                                minimumBet: this.GameManager.getBetValues(this.lastControlled)
-                            });
-                            
                             this.lastControlled = this.currentPlayer;
                             this.currentPlayer = message.member_id!;
+
+                            this.WebSocket.broadcast({
+                                type: ServerEvents.PLAYER_HAS_CONTROLS,
+                                member_id: this.currentPlayer,
+                                minimumBet: this.GameManager.getBetValues(this.lastControlled)
+                            });
                             
                             break;
                         
@@ -239,7 +239,7 @@ export default class App {
                             
                             break;
                         case MemberAction.RAISE:
-                            newBet.bet = message.value - lastBet.bet + this.GameManager.getBetValues(userId);
+                            newBet.bet = message.value - this.GameManager.getBetValues(this.lastControlled) + (this.GameManager.getBetValues(this.lastControlled) - this.GameManager.getBetValues(userId));
                             this.GameManager.addBet(newBet); 
 
                             this.WebSocket.broadcast({
