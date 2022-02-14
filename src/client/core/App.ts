@@ -74,7 +74,7 @@ export default class App {
             { name: "Name"},
             { name: "Chips" },
             { name: "Einsatz" },
-            { name: "Rolle", width: "col-sm-1" }
+            { name: "Rolle", width: "col-sm-2" }
         );
         
         this.fragenTable = new CustomHTMLTable("fragen");
@@ -289,7 +289,7 @@ export default class App {
                 App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
                 App.getInstance().table.editRowValueByValue(m.id.toString(), "Einsatz", m.einsatz.toString())
 
-                if(!m.hasControls) {
+                if(!m.hasControls || m.status == MemberStatus.FOLDED) {
                     App.getInstance().table.unhighlightRowByValue(m.id.toString());
                 }
 

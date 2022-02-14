@@ -18,15 +18,15 @@
         "Antwort": "160 Millionen"
     },
     {
-        "Frage": "Was ist die Spiellänge von Avengers: Endgame?",
-        "Hinweis_1": "Umgerechnet in Tagen sind es 0,126 Tage.",
-        "Hinweis_2": "Während der Fahrt von Köln nach Hannover könnte man den gesamten Film sehen.",
-        "Antwort": "182 Minuten"
+        "Frage": "Was ist die Spiellänge von Matrix Teil 1?",
+        "Hinweis_1": "Umgerechnet in Tagen sind es 0,11 Tage.",
+        "Hinweis_2": "Während der Fahrt von Ettingen nach Lachen könnte man den gesamten Film sehen.",
+        "Antwort": "129 Minuten"
     },
     {
         "Frage": "Wie viele Filme gibt es auf Netflix?",
-        "Hinweis_1": "Es gibt halb so viele Serien wie Filme auf Netflix",
-        "Hinweis_2": "Wäre diese Zahl des Monatsbrutto so wäre das Jahresnetto 28357 Euro.",
+        "Hinweis_1": "Es gibt halb so viele Serien wie Filme auf Netflix.",
+        "Hinweis_2": "Das General-Abonnement ist genau so teuer.",
         "Antwort": "3800"
     },
     {
@@ -34,5 +34,23 @@
         "Hinweis_1": "Das erfolgreichste Lied in diesem Jahr war Mambo No. 5",
         "Hinweis_2": "Die größte Sorge der meisten IT-ler war Silvester.",
         "Antwort": "1999"
+    },
+    {
+        "Frage": "Wieviel kostet ein Arena Cinema 4D Ticket?",
+        "Hinweis_1": "Von dem Geld könnte man 50 Chupa Chups kaufen.",
+        "Hinweis_2": "Es reicht ganz knapp nicht für 2 Döner",
+        "Antwort": "19"
+    },
+    {
+        "Frage": "Wie schnell fährt ein Bugatti Chiron?",
+        "Hinweis_1": "Er fährt mit einer Geschwindigkeit von 0.000014% der Lichtgeschwindigkeit",
+        "Hinweis_2": "Würde man im Auto sitzen, würde man sich mit einer Geschwindigkeit von 122 Meter pro Sekunde bewegen",
+        "Antwort": "440"
+    },
+    {
+        "Frage": "Wieviele Tage benötigt der Mond um einmal die Erde zu umkreisen?",
+        "Hinweis_1": "Es gibt einen Klub der toten Musiklegenden welche die Zahl in ihrem Namen trägt",
+        "Hinweis_2": "Soviele Tage vergehen bei einer Frau im Durchschnitt während den Zyklen",
+        "Antwort": "27"
     }
 ]
