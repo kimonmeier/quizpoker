@@ -185,12 +185,12 @@ export default class CustomHTMLTable {
         row.cells[cellIndex].hidden = !visible;
     }
 
-    public highlightRowByValue(rowId: string): void {
+    public highlightRowByValue(rowId: string, color: HighlightColor): void {
         this.getRows().forEach(element => {
             this.unhighlightRowByValue(this.getValueByRow(element));
         });
 
-        this.getRowByValue(rowId)?.classList.add("highlight");
+        this.getRowByValue(rowId)?.classList.add(color);
     }
 
     public unhighlightRows(): void {
@@ -200,7 +200,16 @@ export default class CustomHTMLTable {
     }
 
     public unhighlightRowByValue(rowId: string): void {
-        this.getRowByValue(rowId)?.classList.remove("highlight");
+        const toRemove: string[] = [];
+        this.getRowByValue(rowId)?.classList.forEach(x => {
+            if(x.includes("hg_")) {
+                toRemove.push(x);
+            }
+        })
+
+        toRemove.forEach(x => {
+            this.getRowByValue(rowId)?.classList.remove(x);
+        })
     }
 }
 
@@ -220,4 +229,9 @@ export interface RowHeader {
     isTextbox?: boolean,
     id?: string,
     click?: ((this: GlobalEventHandlers, ev: MouseEvent) => any)
+}
+
+export enum HighlightColor {
+    FOLDED = "hg_folded",
+    SELECTED = "hg_grey"
 }

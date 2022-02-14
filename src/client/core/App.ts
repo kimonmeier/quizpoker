@@ -4,7 +4,7 @@ import { ServerEvents } from "../../shared/enums/ServerEvents";
 import { MemberAction } from "../../shared/message/ClientMessage";
 import { FragenPhase, MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
 import WebSocketClient from "../connection/WebSocketClient";
-import CustomHTMLTable from "./CustomHTMLTable";
+import CustomHTMLTable, { HighlightColor } from "./CustomHTMLTable";
 
 const roundToNearest5 = (x: number) => Math.round(x/50)*50;
 
@@ -257,7 +257,7 @@ export default class App {
 
     private recieve(m: ServerMessage): void {
         console.log("Neue Nachricht vom Server");
-        console.log(m);        
+        console.log(m);
 
         switch(m.type) {
             case ServerEvents.PING:
@@ -289,9 +289,15 @@ export default class App {
                 App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
                 App.getInstance().table.editRowValueByValue(m.id.toString(), "Einsatz", m.einsatz.toString())
 
+                if(!m.hasControls) {
+                    App.getInstance().table.unhighlightRowByValue(m.id.toString());
+                }
+
                 if(m.status == MemberStatus.PLEITE) {
                     App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", "Pleite");
                     App.getInstance().table.editRowValueByValue(m.id.toString(), "Einsatz", "");
+                } else if(m.status == MemberStatus.FOLDED) {
+                    App.getInstance().table.highlightRowByValue(m.id.toString(), HighlightColor.FOLDED);
                 }
 
                 break;
@@ -327,8 +333,7 @@ export default class App {
             
             case ServerEvents.PLAYER_HAS_CONTROLS:
                 App.getInstance().setHasControls(m.member_id == App.getInstance().id, m.minimumBet);
-                App.getInstance().table.highlightRowByValue(m.member_id.toString());
-                // TODO: Player farbig markieren!
+                App.getInstance().table.highlightRowByValue(m.member_id.toString(), HighlightColor.SELECTED);
 
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();

@@ -1,5 +1,13 @@
-.highlight {
-    background: grey;
-    color: white;
+.hg_grey {
+    background: rgba(255, 255, 255, 0.2);
 }
 
+.hg_folded {
+    background: rgba(red, 0, 0, 0.1);
+}
+
+#bets {
+    max-height: 200px;
+    overflow-y: scroll;
+    overflow-x: auto;
+}

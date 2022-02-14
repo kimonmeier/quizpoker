@@ -4,7 +4,7 @@ import { ServerEvents } from "../../shared/enums/ServerEvents";
 import { GameMasterAction } from "../../shared/message/ClientMessage";
 import { FragenPhase, MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
 import WebSocketClient from "../connection/WebSocketClient";
-import CustomHTMLTable from "./CustomHTMLTable";
+import CustomHTMLTable, { HighlightColor } from "./CustomHTMLTable";
 
 document.addEventListener("DOMContentLoaded", (event) => {
     GameMasterApp.getInstance().startApp();
@@ -171,9 +171,16 @@ export default class GameMasterApp {
                 (document.getElementById("einsatz_" + m.id) as HTMLInputElement).value =  m.einsatz.toString();
                 //GameMasterApp.getInstance().teilnehmerTable.hideRowValue(m.id.toString(), "Kontrolle", !m.hasControls);
 
+                if(!m.hasControls || m.status == MemberStatus.FOLDED) {
+                    GameMasterApp.getInstance().teilnehmerTable.unhighlightRowByValue(m.id.toString());
+                }
+
                 if(m.status == MemberStatus.PLEITE) {
                     GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.id.toString(), "Kontrolle", "Pleite", true);
+                } else if(m.status == MemberStatus.FOLDED) {
+                    GameMasterApp.getInstance().teilnehmerTable.highlightRowByValue(m.id.toString(), HighlightColor.FOLDED);
                 }
+
                 break;
 
             case ServerEvents.UPDATED_GAME_VALUES:
@@ -185,7 +192,7 @@ export default class GameMasterApp {
                 break;
 
             case ServerEvents.PLAYER_HAS_CONTROLS:
-                GameMasterApp.getInstance().teilnehmerTable.highlightRowByValue(m.member_id.toString());
+                GameMasterApp.getInstance().teilnehmerTable.highlightRowByValue(m.member_id.toString(), HighlightColor.SELECTED);
                 break;
 
             case ServerEvents.GAME_MASTER_QUESTION:
