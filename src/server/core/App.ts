@@ -13,6 +13,7 @@ export default class App {
     public readonly WebSocket: WebSocketConnection;
     public readonly GameManager: GameManager;
     public lastControlled: number = 0;
+    public currentPlayer: number = 0;
 
     public constructor() {
         this.WebSocket = new WebSocketConnection();
@@ -63,13 +64,14 @@ export default class App {
                 case ClientEvents.GAME_MASTER_ACTION:
                     switch(message.action) {
                         case GameMasterAction.CONTROLS_SELECTED:
-                            this.lastControlled = message.member_id!;
-
                             this.WebSocket.broadcast({
                                 type: ServerEvents.PLAYER_HAS_CONTROLS,
                                 member_id: message.member_id as number,
-                                minimumBet: this.GameManager.getLastBet().bet
+                                minimumBet: this.GameManager.getBetValues(this.lastControlled)
                             });
+                            
+                            this.lastControlled = this.currentPlayer;
+                            this.currentPlayer = message.member_id!;
                             
                             break;
                         
@@ -98,6 +100,8 @@ export default class App {
                             this.GameManager.clearBets();
 
                             this.GameManager.forwardRoles();
+
+                            this.currentPlayer = this.GameManager.getBigBlind();
 
                             client.send({
                                 type: ServerEvents.GAME_MASTER_QUESTION,
@@ -199,7 +203,7 @@ export default class App {
                                 type: ServerEvents.UPDATED_MITGLIED_VALUES,
                                 chips: this.GameManager.getRemainingChips(message.member_id!),
                                 einsatz: this.GameManager.getBetValues(message.member_id!),
-                                hasControls: this.lastControlled == message.member_id!,
+                                hasControls: this.currentPlayer == message.member_id!,
                                 id: message.member_id!,
                                 status: MemberStatus.ON
                             })
@@ -216,13 +220,12 @@ export default class App {
                     
                 case ClientEvents.MITGLIED_ACTION:
                     const userId = Cache.getInstance().getClientIdByWebsocket(client);
-                    const user = Cache.getInstance().getClientCacheById(userId);
                     const lastBet = this.GameManager.getLastBet();
                     const newBet: Bet =  { player_id: userId, bet: lastBet.bet };
 
                     switch(message.action) {
                         case MemberAction.CALL:
-                            newBet.bet = lastBet.bet - this.GameManager.getBetValues(userId);
+                            newBet.bet = this.GameManager.getBetValues(this.lastControlled) - this.GameManager.getBetValues(userId);
                             this.GameManager.addBet(newBet);
 
                             this.WebSocket.broadcast({
@@ -236,7 +239,7 @@ export default class App {
                             
                             break;
                         case MemberAction.RAISE:
-                            newBet.bet = message.value - lastBet.bet;
+                            newBet.bet = message.value - lastBet.bet + this.GameManager.getBetValues(userId);
                             this.GameManager.addBet(newBet); 
 
                             this.WebSocket.broadcast({
