@@ -20,7 +20,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
-        <div id="login" class="container p-5 bg-dark">
+        <div id="login" hidden class="container p-5 bg-dark">
             <div class="form-group row">
                 <label for="name" class="col-sm-2 text-white">Name:</label>
                 <input type="text" class="form-control col bg-dark text-white" id="name"/>
@@ -37,41 +37,67 @@
             </div>
         </div>
 
-        <div id="play" hidden class="container bg-dark text-white">
-            <h2 class="text-center">Fragen</h2>
-            <div class="row m-2">
-                <table id="fragen" class="table bg-dark text-white">
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <hr>
-            <h2 class="text-center">Teilnehmer</h2>
-            <div class="row m-2">
-                <table id="teilnehmer" class="table bg-dark text-white">
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div id="schaetzung" hidden class="row">
-                <label class="col-sm-1 m-2 text-right bg-dark text-white" for="schaetzungText">Schätzung:</label>
-                <input type="text" id="schaetzungText" class="col m-2 form-control bg-dark text-white"/>
-                <button id="btnSubmitSchaetzung" class="col-sm-1 m-2 btn btn-success bg-dark text-white">Abschicken</button>
-            </div>
-            <div id="game-controls">
-                <div id="raise" class="row">
-                    <label class="col-sm-1 text-right bg-dark text-white" for="raiserange">Raise:</label>
-                    <input type="range" id="raiserange" class="col form-control m-2 range bg-dark text-white" step="50" min="50" max="10000" value="0"/>
-                    <input type="text" id="raisetext" class="col form-control m-2 text bg-dark text-white" value="0"/>
-                </div>
-                <div id="controls" class="row">
-                    <button id="btnRaise" class="col m-2 btn btn-primary bg-dark text-white">Raise</button>
-                    <button id="btnCall" class="col m-2 btn btn-primary bg-dark text-white">Call</button>
-                    <button id="btnFold" class="col m-2 btn btn-danger bg-dark text-white">Fold</button>
+        <div id="play" class="container bg-dark text-white">
+            <div class="left">
+                <h2 class="text-center">Fragen</h2>
+                <div class="m-2">
+                    <table id="fragen" class="table bg-dark text-white">
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
+            <div class="main">
+                <!-- <h2 class="text-center">Teilnehmer</h2>
+                <div class="row m-2">
+                    <table id="teilnehmer" class="table bg-dark text-white">
+                        <tbody>
+    
+                        </tbody>
+                    </table>
+                </div>-->
+
+                <div class="player">
+                    <iframe src="https://vdo.ninja/?view=nbV6eqN&scene&room=UWU&cleanoutput&transparent" frameborder="0" allow="autoplay" class="player-cam"></iframe>
+                    <div class="player-infos">
+                        <div class="chips">
+                            10'000
+                        </div>
+                        <div class="schaetzung">
+                            100   
+                        </div>
+                        <div class="einsatz">
+                            150
+                        </div>
+                    </div>
+                </div>
+                <div class="player">
+                    <iframe src="https://vdo.ninja/?view=K4YtS44&scene&room=UWU&cleanoutput&transparent" frameborder="0" allow="autoplay" class="player-cam"></iframe>
+                </div>
+            </div>
+
+            <div class="bottom">
+                <div id="schaetzung" hidden class="row">
+                    <label class="col-sm-1 m-2 text-right bg-dark text-white" for="schaetzungText">Schätzung:</label>
+                    <input type="text" id="schaetzungText" class="col m-2 form-control bg-dark text-white"/>
+                    <button id="btnSubmitSchaetzung" class="col-sm-1 m-2 btn btn-success bg-dark text-white">Abschicken</button>
+                </div>
+                <div id="game-controls">
+                    <div id="raise" class="row">
+                        <label class="col-sm-1 text-right bg-dark text-white" for="raiserange">Raise:</label>
+                        <input type="range" id="raiserange" class="col form-control m-2 range bg-dark text-white" step="50" min="50" max="10000" value="0"/>
+                        <input type="text" id="raisetext" class="col form-control m-2 text bg-dark text-white" value="0"/>
+                    </div>
+                    <div id="controls" class="row">
+                        <button id="btnRaise" class="col m-2 btn btn-primary bg-dark text-white">Raise</button>
+                        <button id="btnCall" class="col m-2 btn btn-primary bg-dark text-white">Call</button>
+                        <button id="btnFold" class="col m-2 btn btn-danger bg-dark text-white">Fold</button>
+                    </div>
+                </div>
+            </div>
+
             <hr>
             <h2 hidden class="text-center">Bets</h2>
             <div hidden id="bets" class="m-5">

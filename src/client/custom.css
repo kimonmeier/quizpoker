@@ -11,3 +11,77 @@
     overflow-y: scroll;
     overflow-x: auto;
 }
+.left {
+    display: inline;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 15%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    height: 80%;
+}
+
+.main {
+    display: inline;
+    position: absolute;
+    width: 75%;
+    top: 10px;
+    left: 20%;
+    height: 80%;
+    border: 2px solid black;
+    border-radius: 15px;
+    display: flex;
+}
+
+.bottom {
+    display: inline;
+    position: absolute;
+    top: 82%;
+    left: 20%;
+    width: 75%;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.player {
+    border: 5px solid red;
+    margin: 5px;
+    height: 200px;
+}
+
+.player-cam {
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+    max-height: 150px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.player-infos {
+    display: table;
+    padding: 0px;
+    background-color: black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 30px;
+    font-size: small;
+}
+
+.player-infos div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.chips {
+    margin-left: 100px;
+    margin-right: auto;
+    width: 50px;
+    background-color: green;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 1px;
+    text-align: center;
+}
