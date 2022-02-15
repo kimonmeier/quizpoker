@@ -122,11 +122,13 @@ export default class App {
         }
 
         document.getElementById("btnLogin")!.onclick = (event) => {
-            var text = (document.getElementById("name")! as HTMLInputElement).value;
-            
+            const text = (document.getElementById("name")! as HTMLInputElement).value;
+            const link = (document.getElementById("url")! as HTMLInputElement).value;
+
             this.client.send({ 
                 type: ClientEvents.MEMBER_LOGIN,
-                name: text
+                name: text,
+                link: link
             });
         };
 

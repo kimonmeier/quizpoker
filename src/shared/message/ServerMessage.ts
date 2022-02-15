@@ -9,6 +9,7 @@ interface PingServerEvent {
 interface NewMemberEvent {
     type: ServerEvents.NEW_MITGLIED;
     name: string;
+    link: string;
     id: number;
 }
 

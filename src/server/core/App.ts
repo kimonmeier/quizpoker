@@ -35,13 +35,14 @@ export default class App {
                         client.send({
                             type: ServerEvents.NEW_MITGLIED,
                             id: element[0],
-                            name: element[1].name
+                            name: element[1].name,
+                            link: message.link
                         })
                     });
                 
                     var id: number = Cache.getInstance().addClient({ chips: 10000, name: message.name, client: client, status: MemberStatus.ON });
                     client.send({ type: ServerEvents.MITGLIED_SUCCESSFULL_LOGIN, id: id });
-                    this.WebSocket.broadcast({type: ServerEvents.NEW_MITGLIED, id: id, name: message.name});
+                    this.WebSocket.broadcast({type: ServerEvents.NEW_MITGLIED, id: id, name: message.name, link: message.link});
                     break;
 
                 case ClientEvents.MEMBER_LEAVT:

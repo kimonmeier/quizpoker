@@ -8,7 +8,8 @@ interface ConnectionSuccessEvent {
 
 interface MemberLoginEvent {
     type: ClientEvents.MEMBER_LOGIN,
-    name: string
+    name: string,
+    link: string
 }
 
 interface MemberLeftEvent {
