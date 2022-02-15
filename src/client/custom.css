@@ -25,6 +25,9 @@
 .main {
     display: inline;
     position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
     width: 75%;
     top: 10px;
     left: 20%;
@@ -32,6 +35,11 @@
     border: 2px solid black;
     border-radius: 15px;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow: hidden;
 }
 
 .bottom {
@@ -46,42 +54,93 @@
 }
 
 .player {
-    border: 5px solid red;
     margin: 5px;
-    height: 200px;
+    margin-bottom: 50px;
 }
 
 .player-cam {
-    width: 100%;
-    height: auto;
-    min-height: 150px;
-    max-height: 150px;
+    width: 450px;
+    height: 250px;
     padding: 0px;
     margin: 0px;
+    background-color: black;
 }
 
 .player-infos {
-    display: table;
-    padding: 0px;
+    position: absolute;
+    margin-top: -6px;
     background-color: black;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    height: 30px;
+    width: 450px;
+    height: 50px;
     font-size: small;
 }
 
 .player-infos div {
-    display: table-cell;
-    vertical-align: middle;
+    display: inline;
+    border-radius: 10px;
 }
 
 .chips {
-    margin-left: 100px;
-    margin-right: auto;
-    width: 50px;
+    margin-top: 7.5px;
+    position: absolute;
+    margin-left: 10px;
+    width: 75px;
     background-color: green;
     border: 1px solid white;
     border-radius: 5px;
-    padding: 1px;
+    padding: 5px;
     text-align: center;
+}
+
+.schaetzung {
+    margin-top: 7.5px;
+    position: absolute;
+    margin-left: 112.5px;
+    width: 225px;
+    background-color: green;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+.einsatz {
+    margin-top: 7.5px;
+    position: absolute;
+    margin-left: 365px;
+    width: 75px;
+    background-color: green;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+@media screen and (min-width: 1920px) {
+    .player-cam {
+        width: 600px;
+        height: 340px;
+    }
+
+    .player-infos { 
+        width: 600px;
+        font-size: medium;
+    }
+
+    .chips {
+        margin-left: 10px;
+        width: 100px;
+    }
+
+    .schaetzung {
+        margin-left: 140px;
+        width: 325px;
+    }
+
+    .einsatz {
+        margin-left: 490px;
+        width: 100px;
+    }
 }
