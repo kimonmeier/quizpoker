@@ -214,6 +214,26 @@ export default class App {
                                 chips: this.GameManager.getPot(),
                                 id: message.member_id!
                             });
+
+                            const wonPot = this.GameManager.getPot();
+                            this.GameManager.flushChips();
+                            this.GameManager.clearBets();
+
+                            const winner = Cache.getInstance().getClientCacheById(message.member_id!)!;
+                            winner!.chips += wonPot;
+
+                            Cache.getInstance().updateClient(message.member_id!, winner);
+
+                            Cache.getInstance().getAll().forEach(x => {
+                                this.WebSocket.broadcast({
+                                    type: ServerEvents.UPDATED_MITGLIED_VALUES,
+                                    chips: x[1].chips,
+                                    einsatz: 0,
+                                    hasControls: false,
+                                    id: x[0],
+                                    status: x[1].chips > 0 ? MemberStatus.ON : MemberStatus.PLEITE
+                                })
+                            })
                     }
 
                     break;
