@@ -105,7 +105,7 @@ export default class App {
             } 
             if(currentNumber >= this.maxChips) {
                currentNumber = this.maxChips;
-            }   
+            } 
 
             this.raiseRangeInput.value = currentNumber.toString();
             this.raiseTextInput.value = currentNumber.toString();
@@ -281,7 +281,7 @@ export default class App {
                 
             case ServerEvents.UPDATED_MITGLIED_VALUES:
                 if(m.id == App.getInstance().id) {
-                    App.getInstance().setMaxChips(m.chips);
+                    App.getInstance().setMaxChips(m.chips + m.einsatz);
                     App.getInstance().status = m.status;
                     App.getInstance().setHasControls(m.hasControls, 0);
                 }
