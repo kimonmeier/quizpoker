@@ -17,6 +17,27 @@ window.onbeforeunload = (ev: Event) => {
 }
 
 export default class App {
+    private readonly CHIP_PREFIX: string = "chips_";
+    private readonly SCHAETZUNG_PREFIX: string = "schaetzung_";
+    private readonly EINSATZ_PREFIX: string = "einsatz_";
+    private readonly PLAYER_PREFIX: string = "player_";
+
+    private readonly playerTemplate: string = ''
+    + '<div id="' + this.PLAYER_PREFIX + '{{playerId}}" class="player">'
+    + ' <iframe src="{{link}}" frameborder="0" allow="autoplay" class="player-cam"></iframe>'
+    + '     <div class="player-infos">'
+    + '         <div id="' + this.CHIP_PREFIX + '{{playerId}}" class="chips">'
+    + '             0'
+    + '         </div>'
+    + '         <div id="' + this.SCHAETZUNG_PREFIX + '{{playerId}}" class="schaetzung">'
+    + '             0'
+    + '         </div>'
+    + '         <div id="' + this.EINSATZ_PREFIX + '{{playerId}}" class="einsatz">'
+    + '             0'
+    + '         </div>'
+    + '     </div>'
+    + '</div>';
+
     private static instance: App;
 
     public static getInstance(): App {
@@ -33,7 +54,6 @@ export default class App {
     private raiseTextInput!: HTMLInputElement;
     private raiseRangeInput!: HTMLInputElement;
 
-    private table!: CustomHTMLTable;
     private fragenTable!: CustomHTMLTable;
     private id: number = 0;
     private maxChips: number = 10000;
@@ -53,7 +73,7 @@ export default class App {
         this.disableInputs(true);
         this.disableSchaetzungen(true, false);
 
-        this.client = new WebSocketClient("ws://gameshow.k-meier.ch:2222");
+        this.client = new WebSocketClient("ws://localhost:2222");
 
         this.client.recieve = this.recieve;
     }
@@ -68,14 +88,6 @@ export default class App {
         this.raiseTextInput = document.getElementById("raisetext") as HTMLInputElement;
         this.raiseRangeInput = document.getElementById("raiserange") as HTMLInputElement;
         this.schaetzungTextInput = document.getElementById("schaetzungText") as HTMLInputElement;
-
-        this.table = new CustomHTMLTable("teilnehmer");
-        this.table.addHeaders(
-            { name: "Name"},
-            { name: "Chips" },
-            { name: "Einsatz" },
-            { name: "Rolle", width: "col-sm-2" }
-        );
         
         this.fragenTable = new CustomHTMLTable("fragen");
         this.fragenTable.addHeaders(
@@ -248,13 +260,13 @@ export default class App {
     }
 
     private clearRoles(): void {
-        for(var i = 0; true; i++) {
+        /*for(var i = 0; true; i++) {
             if(App.getInstance().table.getRow(i) == undefined) {
                 break;
             }
 
             App.getInstance().table.editRowValueByIdx(i, "Rolle", "");
-        }
+        }*/
     }
 
     private recieve(m: ServerMessage): void {
@@ -268,17 +280,20 @@ export default class App {
                 break;
                 
             case ServerEvents.NEW_MITGLIED:
-                if(App.getInstance().table.getRowByValue(m.id.toString()) != null) {
+                if(document.getElementById(App.getInstance().PLAYER_PREFIX + m.id) != null) {
                     return;
                 }
 
                 console.log("Neues Mitglied beigetreten!");
-                App.getInstance().table.addRow(m.id.toString(), m.name, "10000", "0", App.getInstance().getRole(PlayerRole.PLAYER));
+                
+                document.getElementById("teilnehmer")!.innerHTML += App.getInstance().playerTemplate.replaceAll("{{playerId}}", m.id.toString()).replaceAll("{{link}}", m.link); 
+
+                document.getElementById(App.getInstance().CHIP_PREFIX + m.id.toString())!.textContent = "10000";
                 break;
 
             case ServerEvents.REMOVED_MITGLIED:
                 console.log("Mitglied wurde entfernt!");
-                App.getInstance().table.deleteRowById(m.id.toString());
+                document.getElementById(App.getInstance().PLAYER_PREFIX + m.id.toString())!.remove();
                 break;
                 
             case ServerEvents.UPDATED_MITGLIED_VALUES:
@@ -288,18 +303,24 @@ export default class App {
                     App.getInstance().setHasControls(m.hasControls, 0);
                 }
 
-                App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", m.chips.toString());
-                App.getInstance().table.editRowValueByValue(m.id.toString(), "Einsatz", m.einsatz.toString())
+                document.getElementById(App.getInstance().CHIP_PREFIX + m.id.toString())!.innerText = m.chips.toString();
+                document.getElementById(App.getInstance().EINSATZ_PREFIX + m.id.toString())!.innerText = m.einsatz.toString();
 
                 if(!m.hasControls || m.status == MemberStatus.FOLDED) {
-                    App.getInstance().table.unhighlightRowByValue(m.id.toString());
+                    //TODO: App.getInstance().table.unhighlightRowByValue(m.id.toString());
                 }
 
                 if(m.status == MemberStatus.PLEITE) {
-                    App.getInstance().table.editRowValueByValue(m.id.toString(), "Chips", "Pleite");
-                    App.getInstance().table.editRowValueByValue(m.id.toString(), "Einsatz", "");
+                    if(!document.getElementById(App.getInstance().SCHAETZUNG_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {
+                        document.getElementById(App.getInstance().SCHAETZUNG_PREFIX + m.id.toString())!.classList.add(HighlightColor.FOLDED);
+                    }
+                    document.getElementById(App.getInstance().SCHAETZUNG_PREFIX + m.id.toString())!.innerText = "Pleite";
+
                 } else if(m.status == MemberStatus.FOLDED) {
-                    App.getInstance().table.highlightRowByValue(m.id.toString(), HighlightColor.FOLDED);
+                    if(!document.getElementById(App.getInstance().SCHAETZUNG_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {
+                        document.getElementById(App.getInstance().SCHAETZUNG_PREFIX + m.id.toString())!.classList.add(HighlightColor.FOLDED);
+                    }
+                    document.getElementById(App.getInstance().SCHAETZUNG_PREFIX + m.id.toString())!.innerText = "Folded";
                 }
 
                 break;
@@ -328,14 +349,14 @@ export default class App {
                     App.getInstance().disableSchaetzungen(false, true);
                 }
                 
-                App.getInstance().table.unhighlightRows();
+                //TODO: App.getInstance().table.unhighlightRows();
                 App.getInstance().fragenTable.clearRows();
                 App.getInstance().fragenTable.addRow(m.phase, m.phase.replace("_", ""), m.frage);
                 break;
             
             case ServerEvents.PLAYER_HAS_CONTROLS:
                 App.getInstance().setHasControls(m.member_id == App.getInstance().id, m.minimumBet);
-                App.getInstance().table.highlightRowByValue(m.member_id.toString(), HighlightColor.SELECTED);
+                //TODO: App.getInstance().table.highlightRowByValue(m.member_id.toString(), HighlightColor.SELECTED);
 
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();
@@ -344,8 +365,9 @@ export default class App {
             case ServerEvents.ROLES_SELECTED:
                 App.getInstance().clearRoles();
 
+                /*TODO: 
                 App.getInstance().table.editRowValueByValue(m.small_blind.toString(), "Rolle", App.getInstance().getRole(PlayerRole.SMALL_BLIND));
-                App.getInstance().table.editRowValueByValue(m.big_blind.toString(), "Rolle", App.getInstance().getRole(PlayerRole.BIG_BLIND));
+                App.getInstance().table.editRowValueByValue(m.big_blind.toString(), "Rolle", App.getInstance().getRole(PlayerRole.BIG_BLIND));*/
                 break;
         }
     }
