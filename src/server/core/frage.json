@@ -1,56 +1,302 @@
 [
     {
-        "Frage": "Mit welcher Geschwindigkeit dreht sich die Erde am Äquator um die eigene Achse?",
-        "Hinweis_1": "Der umfang der Erde beträgt am Äquator 40.075 km",
-        "Hinweis_2": "Würde man direkt auf dem Äquator stehen, würde man sich mit einer Geschwindigkeit von 464 Metern pro Sekunde bewegen",
-        "Antwort": "1.673 km/h"
+        "Frage": "Wie viel meint man mit dem Wort \"hundred\"?",
+        "Hinweis_1": "Das Wort wird vom Altnordischen Wort hundrath abgeleitet.",
+        "Hinweis_2": "Die Lösung ist nicht 100",
+        "Antwort": "120"
     },
     {
-        "Frage": "Wann began der Bau der Berliner Mauer?",
-        "Hinweis_1": "In diesem Jahr wurde John F. Kennedy der 35. Präsident der USA.",
-        "Hinweis_2": "In diesem Jahr ist Armin Laschet geboren.",
-        "Antwort": "1961"
+        "Frage": "Wie viele verschiedene Permutationen hat ein Zauberwürfel (3x3x3) ? (-Quintillion-)",
+        "Hinweis_1": "Eine Quintillion hat 18 Nullen.",
+        "Hinweis_2": "Ein 3x3x3 Zauberwürfel hat 26 Steine.",
+        "Antwort": "43",
+        "Einheit": "Quintillion"
     },
     {
-        "Frage": "Wie viele Menschen sprechen Russisch als Muttersprache?",
-        "Hinweis_1": "Real Madrid bot PSG im Sommer diese Zahl als Ablösesumme für Kylian Mbappé welches abgelehnt wurde.",
-        "Hinweis_2": "Würden in Bangladesch ca. 3 Millionen weniger Einwohner leben, dann könnten alle Einwohner russisch sprechen.",
-        "Antwort": "160 Millionen"
+        "Frage": "Wie schnell ist der Weltrekord für das am schnellsten auf eine Million zählen? (-Tage-)",
+        "Hinweis_1": "Die Tage die zum zählen benötigt wurden sind zweistellig.",
+        "Hinweis_2": "Es ging über ein halbes Jahr.",
+        "Antwort": "89",
+        "Einheit": "Tage"
     },
     {
-        "Frage": "Was ist die Spiellänge von Matrix Teil 1?",
-        "Hinweis_1": "Umgerechnet in Tagen sind es 0,11 Tage.",
-        "Hinweis_2": "Während der Fahrt von Ettingen nach Lachen könnte man den gesamten Film sehen.",
-        "Antwort": "129 Minuten"
+        "Frage": "Welche Zahl bedeutet in Ostasien \"Tod\"?",
+        "Hinweis_1": "Es ist eine gerade Zahl.",
+        "Hinweis_2": "Die Zahl ist in der 10er Reihe.",
+        "Antwort": "4"
     },
     {
-        "Frage": "Wie viele Filme gibt es auf Netflix?",
-        "Hinweis_1": "Es gibt halb so viele Serien wie Filme auf Netflix.",
-        "Hinweis_2": "Das General-Abonnement ist genau so teuer.",
-        "Antwort": "3800"
+        "Frage": "Welche zahl bedeutet in Thailand \"ha\" als würde man lachen?",
+        "Hinweis_1": "Die Nummer existiert in einem Jasskartenset.",
+        "Hinweis_2": "Multipliziert man diese Zahl mit einer geraden Zahl bekommt man an hinterster stelle immer 0, Multipliziert man die gesuchte Zahl mit einer ungeraden Zahl ergibt es an hinterster Stelle immer die gesuchte Zahl",
+        "Antwort": "5"
     },
     {
-        "Frage": "Seit wann ist Putin Präsident von Russland?",
-        "Hinweis_1": "Das erfolgreichste Lied in diesem Jahr war Mambo No. 5",
-        "Hinweis_2": "Die größte Sorge der meisten IT-ler war Silvester.",
-        "Antwort": "1999"
+        "Frage": "was ist die grösste Primzahl? (M……..)",
+        "Hinweis_1": "Die Nummer besteht aus 8 Ziffern.",
+        "Hinweis_2": "Die 7 kommt darin drei mal vor.",
+        "Antwort": "77232917"
     },
     {
-        "Frage": "Wieviel kostet ein Arena Cinema 4D Ticket?",
-        "Hinweis_1": "Von dem Geld könnte man 50 Chupa Chups kaufen.",
-        "Hinweis_2": "Es reicht ganz knapp nicht für 2 Döner",
-        "Antwort": "19"
+        "Frage": "Was für einen Score bedeutet das Wort \"Love\" im Tennis?",
+        "Hinweis_1": "Der Begriff kommt vom Französischen wort \"l'oeuf\", was \"Ei\" bedeutet.",
+        "Hinweis_2": "Man muss sehr schlecht sein um diesen Score zu bekommen.",
+        "Antwort": "0"
     },
     {
-        "Frage": "Wie schnell fährt ein Bugatti Chiron?",
-        "Hinweis_1": "Er fährt mit einer Geschwindigkeit von 0.000014% der Lichtgeschwindigkeit",
-        "Hinweis_2": "Würde man im Auto sitzen, würde man sich mit einer Geschwindigkeit von 122 Meter pro Sekunde bewegen",
-        "Antwort": "440"
+        "Frage": "Wie viel % der Menschen haben Diskalkulie? (-Prozent-)",
+        "Hinweis_1": "Es sind mehr als 1%.",
+        "Hinweis_2": "Es sind weniger als 20%.",
+        "Antwort": "10",
+        "Einheit": "%"
     },
     {
-        "Frage": "Wieviele Tage benötigt der Mond um einmal die Erde zu umkreisen?",
-        "Hinweis_1": "Es gibt einen Klub der toten Musiklegenden welche die Zahl in ihrem Namen trägt",
-        "Hinweis_2": "Soviele Tage vergehen bei einer Frau im Durchschnitt während den Zyklen",
-        "Antwort": "27"
+        "Frage": "Wie viele Farben haben Landkarten?",
+        "Hinweis_1": "Strassen sind meist gelb.",
+        "Hinweis_2": "Häuser sind Rot-Orange, was als eine Farbe zählt.",
+        "Antwort": "4"
+    },
+    {
+        "Frage": "Vor welcher Zahl haben Japaner angst?",
+        "Hinweis_1": "Dividiert man diese Zahl durch eine gerade Zahl entsteht eine Kommazahl.",
+        "Hinweis_2": "Die Zahl ist ungerade.",
+        "Antwort": "9"
+    },
+    {
+        "Frage": "Triskaidekaphobia ist der Englische begriff für die Angst vor welcher Zahl?",
+        "Hinweis_1": "Es ist sehr wahrscheinlich diese Zahl als Alter zu erreichen.",
+        "Hinweis_2": "Eine äusserst bekannte, elf teilige Horrorfilmreihe beinhaltet diese Zahl im Namen.",
+        "Antwort": "13"
+    },
+    {
+        "Frage": "In welchem Jahr wurden am meisten Menschliche Zwillinge geboren?",
+        "Hinweis_1": "Es ist noch nicht lange her.",
+        "Hinweis_2": "Jetzt werden mehr Zwillinge geboren als jemals zuvor.",
+        "Antwort": "2022"
+    },
+    {
+        "Frage": "Wie schnell fuhr die erste Person, die wegen Geschwindigkeitsüberschreitung verurteilt wurde?",
+        "Hinweis_1": "Die erste Verurteilung wegen zu schnellen Autofahrens war im Januar 1896.",
+        "Hinweis_2": "Die meisten Raser wurden 2015 verurteilt.",
+        "Antwort": "13",
+        "Einheit": "KMH"
+    },
+    {
+        "Frage": "In welchem Jahr wurden die meisten Raser verurteilt?",
+        "Hinweis_1": "Die Antwort ist in einem anderen Tipp in diesem Spiel beantwortet.",
+        "Hinweis_2": "es war nach 2010.",
+        "Antwort": "2015"
+    },
+    {
+        "Frage": "Wie viele Falten hat eine Kochmütze?",
+        "Hinweis_1": "Damit ist die weisse, grosse Papiermütze gemeint, die Köche in den Filmen und manchmal im echten Leben tragen.",
+        "Hinweis_2": "Solche Kopfbedeckungen kann man über längeren Zeitraum tragen.",
+        "Antwort": "100"
+    },
+    {
+        "Frage": "Bis in welches Jahr lässt sich die Verwendung von \"OMG\" zurückverfolgen?",
+        "Hinweis_1": "Die Antwort liegt im Tausenderbereich.",
+        "Hinweis_2": "Die Zahl 9 kommt in der gesuchten Antwort vor.",
+        "Antwort": "1917"
+    },
+    {
+        "Frage": "Wie warm war die wärmste Temperatur die auf der Erde jemals gemessen wurde? (-Billionen Grad-)",
+        "Hinweis_1": "Es sind mehr als 1.",
+        "Hinweis_2": "Es sind weniger als 3.",
+        "Antwort": "2",
+        "Einheit": "Grad"
+    },
+    {
+        "Frage": "Wie viel Prozent der Fläche des brasilianischen Regenwaldes wurde bisher abgeholzt, um Rindfleisch, Holz und Soja zu gewinnen?",
+        "Hinweis_1": "Regenwälder sind bedroht.",
+        "Hinweis_2": "Jedes Jahr werden 158.000 Quadratkilometer tropischer Regenwald abgeholzt.",
+        "Antwort": "20",
+        "Einheit": "%"
+    },
+    {
+        "Frage": "Wie viele Varianten von Kaffeegetränken werden in einer Starbucks-Filiale im Durchschnitt bestellt?",
+        "Hinweis_1": "Die Antwort liegt irgendwo zwischen 1'000-50'000",
+        "Hinweis_2": "Starbucks Corporation hat einen Umsatz von 26.51 Mrd. US-Dollar",
+        "Antwort": "19000"
+    },
+    {
+        "Frage": "Wie viele Menschen haben weltweit keinen Zugang zu sauberem Trinkwasser?",
+        "Hinweis_1": "Es sind weitaus mehr als Millionen.",
+        "Hinweis_2": "Wasser ist trinkbar sobald es frei von Schadstoffen und Krankheitserregern ist.",
+        "Antwort": "1.2",
+        "Einheit": "Milliarden"
+    },
+    {
+        "Frage": "Wie viel wiegt die Zunge eines Blauwals? (-Kg-)",
+        "Hinweis_1": "Die Zunge eines Blauwals wiegt mehr als ein ganzer Elefant.",
+        "Hinweis_2": "Die gesuchte Zahl ist über 1'000.",
+        "Antwort": "3600",
+        "Einheit": "Kg"
+    },
+    {
+        "Frage": "Der durchschnittliche menschliche Körper besteht zu wie viel Kg aus Wasser?",
+        "Hinweis_1": "Der Menschliche Körper besteht zu 70% aus Wasser.",
+        "Hinweis_2": "Zu viel Wasser zu trinken kann dich umbringen.",
+        "Antwort": "40",
+        "Einheit": "Kg"
+    },
+    {
+        "Frage": "Wie viele Stückchen Zucker enthält eine Flasche Ketchup?",
+        "Hinweis_1": "Ketchup hat viel Zucker.",
+        "Hinweis_2": "Zum Vergleich: ein Apfelsaft hat auf 100ml etwa 4 Zuckerwürfel",
+        "Antwort": "40",
+        "Einheit": "Würfel"
+    },
+    {
+        "Frage": "Wie viele Rosenarten gibt es Weltweit?",
+        "Hinweis_1": "Die meisten Rosenarten sind nur in der Holarktis verbreitet.",
+        "Hinweis_2": "Die Rose wird seit der griechischen Antike als \"Königin der Blumen\" bezeichnet.",
+        "Antwort": "30000",
+        "Einheit": "Rosen"
+    },
+    {
+        "Frage": "So viele Minuten braucht ein Mensch, um wach zu werden?",
+        "Hinweis_1": "Wach ist das Gegenteil von dem schnell reversiblem Zustand verminderten Bewusstseins.",
+        "Hinweis_2": "Unsere Körpertemparatur sinkt im Leichtschlaf leicht ab.",
+        "Antwort": "30",
+        "Einheit": "Minuten"
+    },
+    {
+        "Frage": "Um wie viel % steigt die anzahl an Bakterien die sich im Ohr befinden nachdem man eine Stunde lang Kopfhörer trägt?",
+        "Hinweis_1": "Es sind mehrere Hundert %",
+        "Hinweis_2": "Kopfhörer sind nicht gesund.",
+        "Antwort": "700",
+        "Einheit": "%"
+    },
+    {
+        "Frage": "Wie viel Prozent der Unfälle in Schweden werden durch Elche verursacht?",
+        "Hinweis_1": "Elche gelten als friedliche Giganten der Nordwälder.",
+        "Hinweis_2": "Wenn sie aggressiv werden greifen sie auch Menschen an, besonders zur Brunftzeit im Herbst.",
+        "Antwort": "20",
+        "Einheit": "%"
+    },
+    {
+        "Frage": "Wie viele Knochen hat ein menschliches Neugeborenes?",
+        "Hinweis_1": "Ein erwachsener Mensch hat rund 200 Knochen.",
+        "Hinweis_2": "Wenn ein Knochen bricht zählt es nicht als zwei separate Knochen.",
+        "Antwort": "350",
+        "Einheit": "Knochen"
+    },
+    {
+        "Frage": "Wie viele Silber pro Sekunde kann NoClue, der schnellste Rapper der Welt, rappen?",
+        "Hinweis_1": "Ausnahmsweise kein Tipp an dieser Stelle.",
+        "Hinweis_2": "Der schnellste Song ist nicht von ihm. Mit 229 gerappten Wörtern in 30 Sekunden hält der Song Godzilla den Weltrekord.",
+        "Antwort": "14.1",
+        "Einheit": "Wörter"
+    },
+    {
+        "Frage": "Wie lange hat ein 60 Jahre alter Mann im Laufe seines Lebens insgesamt eine Erektion während er schläft?",
+        "Hinweis_1": "Es wird gesucht wie viele Jahre es insgesamt sind.",
+        "Hinweis_2": "Es sind weniger als 10 jahre.",
+        "Antwort": "5",
+        "Einheit": "Jahre"
+    },
+    {
+        "Frage": "Wann starb der letzte Dodo?",
+        "Hinweis_1": "Der Dodo lebte einst auf der Insel Mauritius.",
+        "Hinweis_2": "Der Vogel konnte nicht fliegen.",
+        "Antwort": "1681"
+    },
+    {
+        "Frage": "Wie viele Wörter für \"Schnee\" gibt es in der Sprache Inuktitut?",
+        "Hinweis_1": "Inuktitut ist die Sprache der Inuit.",
+        "Hinweis_2": "Inuit sind bei uns besser bekannt unter dem Namen Eskimos.",
+        "Antwort": "200",
+        "Einheit": "Wörter"
+    },
+    {
+        "Frage": "Wie viel Champagner trinken die Franzosen ungefähr jährlich? (-Millionen-)",
+        "Hinweis_1": "Die Franzosen haben viele eigene Champagnermarken wie beispielsweise La Grand Couvé.",
+        "Hinweis_2": "Viele Champagnermarken gelten als Traditionsunternehmen.",
+        "Antwort": "185",
+        "Einheit": "Flaschen"
+    },
+    {
+        "Frage": "Wie viel wog das kleinste Baby bei der Geburt?",
+        "Hinweis_1": "1955 kam das schwerste Baby zur welt und wog 10.2kg.",
+        "Hinweis_2": "Ein Baby ist bei der Geburt ungefähr 50cm gross.",
+        "Antwort": "244",
+        "Einheit": "Gramm"
+    },
+    {
+        "Frage": "Wie alt war die bisher älteste Mutter bei der Geburt ihres Babys?",
+        "Hinweis_1": "Stand 2019 war das Durchschnittsalter der Mütter 31.5 Jahre.",
+        "Hinweis_2": "Die jüngste Mutter (eines gesunden Babys) ist 5 Jahre alt.",
+        "Antwort": "70",
+        "Einheit": "Jahre"
+    },
+    {
+        "Frage": "Wie viele Einkerbungen hat ein Golfball?",
+        "Hinweis_1": "Ein Golfball hat einen Durchmesser von mindestens 42.672mm.",
+        "Hinweis_2": "Ein Golfball wiegt maximal 45.926g.",
+        "Antwort": "336"
+    },
+    {
+        "Frage": "Die Fruchtfliege Drosophila Bifurca hat die längsten Spermien. Wie viel Mal länger als das menschliche Spermium ist es?",
+        "Hinweis_1": "Das Menschliche Spermium ist nicht grösser als 0.06mm.",
+        "Hinweis_2": "Im durchschnittlichen Ejakulat eines Menschen sind ca. 39 Millionen dieser Spermien enthalten.",
+        "Antwort": "20000",
+        "Einheit": "Mal"
+    },
+    {
+        "Frage": "Wie viele Menschen starben beim Versuch den Mount Everest zu besteigen?",
+        "Hinweis_1": "7'642 Menschen bestiegen bereits den Mount Everest.",
+        "Hinweis_2": "An gewissen Tages ist die Gipfelregion so überlaufen, dass sich vor der Schlüsselstelle ein regelrechter Stau bildet. Die Wartezeiten in der Todeszone gilt als sehr sehr sehr gefährlich.",
+        "Antwort": "300",
+        "Einheit": "Menschen"
+    },
+    {
+        "Frage": "Was ist der Weltrekord im Bierkrügetragen auf 40 Metern? (-in der Einheit Mass-)",
+        "Hinweis_1": "Ein Masskrug ohne Inhalt wiegt 1.3 Kilo.",
+        "Hinweis_2": "Ein Mass entspricht genau einem Liter.",
+        "Antwort": "29",
+        "Einheit": "Masse"
+    },
+    {
+        "Frage": "Wie gross ist der grösste Hund der Welt?",
+        "Hinweis_1": "Der grösste Hund der Welt ist grösser als sein Frauchen.",
+        "Hinweis_2": "Der grösste Hund der Welt wiegt 155Kg.",
+        "Antwort": "2.3",
+        "Einheit": "Meter"
+    },
+    {
+        "Frage": "Wie viele Kokosnüsse knackt der Weltrekordhalter in einer Minute?",
+        "Hinweis_1": "Der schnellste Weg ist es, die Kokosnuss auf einen harten und unempfindlichen Untergrund zu legen und mit einem Hammer auf eine Stelle zu schlagen.",
+        "Hinweis_2": "Er hat den Weltrekord mit Reifen Kokosnüssen gemacht.",
+        "Antwort": "123",
+        "Einheit": "Kokosnüsse"
+    },
+    {
+        "Frage": "Wie viele Dialekte gibt es in Europa?",
+        "Hinweis_1": "In Deutschland gibt es 20 Dialektgruppen.",
+        "Hinweis_2": "Die meisten Dialekte gibt es in Papua Neuguinea.",
+        "Antwort": "500",
+        "Einheit": "Dialekte"
+    },
+    {
+        "Frage": "Wie viele Muskeln werden für das Stirnrunzeln benötigt?",
+        "Hinweis_1": "Ein Mensch besteht aus 656 Muskeln.",
+        "Hinweis_2": "Der stärkste Muskel des Menschen ist der grosse Rückenmuskel und der grosse Gesässmuskel.",
+        "Antwort": "40",
+        "Einheit": "Muskeln"
+    },
+    {
+        "Frage": "Wie oft atmen wir innerhalb einer Stunde ein und aus?",
+        "Hinweis_1": "Im Jahr atmet eine Person 6'307'200 mal.",
+        "Hinweis_2": "Der Mensch atmet 17'280 Mal an einem Tag.",
+        "Antwort": "900",
+        "Einheit": "Atemzüge"
+    },
+    {
+        "Frage": "Wie viele Computer benötigt Google, um in 0.2 Sekunden dein Suchergebnis anzuzeigen?",
+        "Hinweis_1": "Google ist eine Anspielung auf die Einheit googol.",
+        "Hinweis_2": "In 2021 hatte Google einen Marktanteil von 91.94% und war die dominierende Suchmaschine.",
+        "Antwort": "1000",
+        "Einheit": "Computer"
     }
 ]
