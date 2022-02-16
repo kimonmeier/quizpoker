@@ -95,6 +95,7 @@ export default class App {
         );
 
         (document.getElementById("nachdenkmusik") as HTMLAudioElement).volume = 0.3;
+        (document.getElementById("antwortmusik") as HTMLAudioElement).volume = 0.5;
     }
 
     private registerListener(): void {        
@@ -311,6 +312,11 @@ export default class App {
                 } else {
                     App.getInstance().fragenTable.clearRows();
                 }
+
+                if(m.phase == FragenPhase.ANTWORT) {
+                    (document.getElementById("nachdenkmusik") as HTMLAudioElement).pause();
+                    (document.getElementById("antwortmusik") as HTMLAudioElement).play();
+                }
                 break;
 
             case ServerEvents.NAECHSTE_FRAGE:
@@ -336,7 +342,7 @@ export default class App {
                 break;
 
             case ServerEvents.PLAYER_WON:
-                (document.getElementById("nachdenkmusik") as HTMLAudioElement).pause();
+                (document.getElementById("antwortmusik") as HTMLAudioElement).pause();
                 break;
         }
     }
