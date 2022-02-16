@@ -251,7 +251,7 @@ export default class App {
                                 hasControls: false,
                                 status: MemberStatus.ON
                             });
-                            
+
                             break;
                         case MemberAction.RAISE:
                             newBet.bet = message.value - this.GameManager.getBetValues(this.lastControlled) + (this.GameManager.getBetValues(this.lastControlled) - this.GameManager.getBetValues(userId));
@@ -279,6 +279,15 @@ export default class App {
 
                             break;
                     }
+                    
+                    this.lastControlled = this.currentPlayer;
+                    this.currentPlayer = this.GameManager.getNextPlayer();
+
+                    this.WebSocket.broadcast({
+                        type: ServerEvents.PLAYER_HAS_CONTROLS,
+                        member_id: this.currentPlayer,
+                        minimumBet: 0
+                    });
                 
                 this.WebSocket.broadcast({
                     type: ServerEvents.UPDATED_GAME_VALUES,

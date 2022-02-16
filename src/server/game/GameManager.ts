@@ -112,6 +112,27 @@ export default class GameManager {
     public getSmallBlind(): number {
         return this.roles.Small_Blind
     }
+
+    public getNextPlayer(): number {
+        const lastPlayer = this.bets[this.bets.length - 1].player_id;
+
+        var nextPlayer: number | null = null;
+        var currentId: number = lastPlayer + 1;
+
+        do {
+            if(Cache.getInstance().getClientCacheById(currentId) == null) {
+                currentId = 1;
+            }
+
+            if(Cache.getInstance().getClientCacheById(currentId)!.chips > 0) {
+                nextPlayer = currentId;
+            }
+
+            currentId += 1;
+        } while(nextPlayer == null);
+
+        return nextPlayer;
+    }
 }
 
 interface RoleClass {
