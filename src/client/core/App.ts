@@ -93,6 +93,8 @@ export default class App {
             { name: "Phase", width: "col-sm-2"},
             { name: "Wert" }
         );
+
+        (document.getElementById("nachdenkmusik") as HTMLAudioElement).volume = 0.3;
     }
 
     private registerListener(): void {        
@@ -321,6 +323,8 @@ export default class App {
                 //TODO: App.getInstance().table.unhighlightRows();
                 App.getInstance().fragenTable.clearRows();
                 App.getInstance().fragenTable.addRow(m.phase, m.phase.replace("_", ""), m.frage);
+
+                (document.getElementById("nachdenkmusik") as HTMLAudioElement).play();
                 break;
             
             case ServerEvents.PLAYER_HAS_CONTROLS:
@@ -329,6 +333,10 @@ export default class App {
 
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();
+                break;
+
+            case ServerEvents.PLAYER_WON:
+                (document.getElementById("nachdenkmusik") as HTMLAudioElement).pause();
                 break;
         }
     }
