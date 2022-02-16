@@ -35,7 +35,7 @@ export default class GameMasterApp {
     }
 
     public startApp(): void {
-        this.client = new WebSocketClient("ws://localhost:2222");
+        this.client = new WebSocketClient("wss://gameshow.k-meier.ch:2222");
 
         this.declareVariables();
         this.registerListener();
@@ -250,13 +250,6 @@ export default class GameMasterApp {
                         });
                     }}
                 );
-                break;
-
-            case ServerEvents.ROLES_SELECTED: 
-                GameMasterApp.getInstance().clearRoles(),
-
-                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.small_blind.toString(), "Rolle", GameMasterApp.getInstance().getRole(PlayerRole.SMALL_BLIND));
-                GameMasterApp.getInstance().teilnehmerTable.editRowValueByValue(m.big_blind.toString(), "Rolle", GameMasterApp.getInstance().getRole(PlayerRole.BIG_BLIND));
                 break;
         }
     }
