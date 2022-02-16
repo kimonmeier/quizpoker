@@ -63,8 +63,8 @@ export default class GameMasterApp {
             { name: "Chips" },
             { name: "Einsatz" },
             { name: "Schätzung" },
-            { name: "Rolle", width: "col-sm-1" },
             { name: "Kontrolle", width: "col-sm-1" },
+            { name: "Aufdecken", width: "col-sm-1" },
             { name: "Update", width: "col-sm-1" },
             { name: "Won", width: "col-sm-1" }
         );
@@ -88,35 +88,6 @@ export default class GameMasterApp {
         }
     }
 
-    private getRole(role: PlayerRole): string {
-        const element = document.createElement('div') as HTMLDivElement;
-
-        switch(role) {
-            case PlayerRole.SMALL_BLIND:
-                element.textContent = "Small Blind";
-                element.classList.add("alert");
-                element.classList.add("alert-warning")
-                break;
-            case PlayerRole.BIG_BLIND:
-                element.textContent = "Big Blind";
-                element.classList.add("alert");
-                element.classList.add("alert-success")
-                break;
-        }
-
-        return element.outerHTML;
-    }
-
-    private clearRoles(): void {
-        for(var i = 0; true; i++) {
-            if(GameMasterApp.getInstance().teilnehmerTable.getRow(i) == undefined) {
-                break;
-            }
-
-            GameMasterApp.getInstance().teilnehmerTable.editRowValueByIdx(i, "Rolle", "");
-        }
-    }
-
     private recieve(m: ServerMessage): void {
         switch(m.type) {
             case ServerEvents.PING:
@@ -132,11 +103,18 @@ export default class GameMasterApp {
                     { value: "10000", isTextbox: true, id: "chips_" + m.id.toString() },
                     { value: "0", isTextbox: true, id: "einsatz_" + m.id.toString() },
                     { value: "" },
-                    { value: "" },
                     { value: "Kontrolle", isButton: true, click: () => {
                         GameMasterApp.getInstance().client.send({
                             type: ClientEvents.GAME_MASTER_ACTION,
                             action: GameMasterAction.CONTROLS_SELECTED,
+                            member_id: m.id
+                        });
+                        console.log("Der Member hat die Kontrolle bekommen!");
+                    }},
+                    { value: "Aufdecken", isButton: true, click: () => {
+                        GameMasterApp.getInstance().client.send({
+                            type: ClientEvents.GAME_MASTER_ACTION,
+                            action: GameMasterAction.SHOW_SCHAETZUNG,
                             member_id: m.id
                         });
                         console.log("Der Member hat die Kontrolle bekommen!");
@@ -169,7 +147,6 @@ export default class GameMasterApp {
             case ServerEvents.UPDATED_MITGLIED_VALUES:
                 (document.getElementById("chips_" + m.id) as HTMLInputElement).value =  m.chips.toString();
                 (document.getElementById("einsatz_" + m.id) as HTMLInputElement).value =  m.einsatz.toString();
-                //GameMasterApp.getInstance().teilnehmerTable.hideRowValue(m.id.toString(), "Kontrolle", !m.hasControls);
 
                 if(!m.hasControls || m.status == MemberStatus.FOLDED) {
                     GameMasterApp.getInstance().teilnehmerTable.unhighlightRowByValue(m.id.toString());

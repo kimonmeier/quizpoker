@@ -79,10 +79,17 @@ interface PlayerControlEvent {
     member_id: number,
     minimumBet: number;
 }
+
 interface PlayerWonEvent {
     type: ServerEvents.PLAYER_WON,
     id: number,
     chips: number;
+}
+
+interface ShowSchaetzungEvent {
+    type: ServerEvents.SHOW_SCHAETZUNG,
+    id: number,
+    schaetzung: number,
 }
 
 export enum FragenPhase {
@@ -93,7 +100,7 @@ export enum FragenPhase {
     PAUSE = "Pause"
 }
 
-enum GamePhase {
+export enum GamePhase {
     ROUND,
     PAUSE
 }
@@ -105,4 +112,4 @@ export enum MemberStatus {
 }
 
 
-export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerWonEvent;
+export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerWonEvent | ShowSchaetzungEvent;

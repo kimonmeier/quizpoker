@@ -31,6 +31,7 @@ export default class Cache {
                 hinweis1: current.Hinweis_1,
                 hinweis2: current.Hinweis_2,
                 antwort: current.Antwort,
+                einheit: current.Einheit ?? "",
                 used: false
             })
         }
@@ -132,5 +133,6 @@ export interface Frage {
     hinweis1: string,
     hinweis2: string,
     antwort: string,
+    einheit: string,
     used: boolean
 }

@@ -115,7 +115,7 @@ export default class App {
 
                             this.WebSocket.broadcast({
                                 type: ServerEvents.NAECHSTE_FRAGE,
-                                einheit: "",
+                                einheit: frage.einheit,
                                 frage: frage.frage,
                                 phase: FragenPhase.FRAGE
                             })

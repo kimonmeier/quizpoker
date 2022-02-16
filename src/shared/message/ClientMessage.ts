@@ -50,6 +50,7 @@ export enum GameMasterAction {
     START_GAME,
     WON_GAME,
     UPDATE_MEMBER,
+    SHOW_SCHAETZUNG,
 }
 
 export enum MemberAction {

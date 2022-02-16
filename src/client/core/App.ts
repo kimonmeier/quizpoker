@@ -278,6 +278,7 @@ export default class App {
 
                 document.getElementById(App.CHIP_PREFIX + m.id.toString())!.innerText = m.chips.toString();
                 document.getElementById(App.EINSATZ_PREFIX + m.id.toString())!.innerText = m.einsatz.toString();
+                (document.getElementById(App.SCHAETZUNG_PREFIX + m.id))!.innerText = "Schaetzung";
 
                 if(!m.hasControls || m.status == MemberStatus.FOLDED) {
                     //TODO: App.getInstance().table.unhighlightRowByValue(m.id.toString());
@@ -343,6 +344,10 @@ export default class App {
 
             case ServerEvents.PLAYER_WON:
                 (document.getElementById("antwortmusik") as HTMLAudioElement).pause();
+                break;
+
+            case ServerEvents.SHOW_SCHAETZUNG:
+                (document.getElementById(App.SCHAETZUNG_PREFIX + m.id))!.innerText = m.schaetzung.toString();
                 break;
         }
     }

@@ -26,5 +26,7 @@ export enum ServerEvents {
 
     MEMBER_ISSUED_SCHAETZUNG,
 
-    PLAYER_WON
+    PLAYER_WON,
+
+    SHOW_SCHAETZUNG
 }
