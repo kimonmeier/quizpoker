@@ -35,7 +35,7 @@ export default class GameMasterApp {
     }
 
     public startApp(): void {
-        this.client = new WebSocketClient("wss://gameshow.k-meier.ch:2222");
+        this.client = new WebSocketClient("wss://gameshow.k-meier.ch");
 
         this.declareVariables();
         this.registerListener();

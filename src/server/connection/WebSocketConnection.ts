@@ -19,7 +19,7 @@ export default class WebSocketConnection
 	}
 
 	public connect(): void {
-		
+
 		this.socket = new WebSocket.Server({
 			port: 2222
 		});

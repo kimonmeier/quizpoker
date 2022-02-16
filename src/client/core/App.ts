@@ -72,7 +72,7 @@ export default class App {
         this.disableInputs(true);
         this.disableSchaetzungen(true, false);
 
-        this.client = new WebSocketClient("wss://gameshow.k-meier.ch:2222");
+        this.client = new WebSocketClient("wss://gameshow.k-meier.ch");
 
         this.client.recieve = this.recieve;
     }
