@@ -120,12 +120,6 @@ export default class App {
                                 phase: FragenPhase.FRAGE
                             })
 
-                            this.WebSocket.broadcast({
-                                type: ServerEvents.ROLES_SELECTED,
-                                big_blind: this.GameManager.getBigBlind(),
-                                small_blind: this.GameManager.getSmallBlind()
-                            });
-
                             this.GameManager.addBet({ bet: 100, player_id: this.GameManager.getSmallBlind() });
                             this.GameManager.addBet({ bet: 200, player_id: this.GameManager.getBigBlind() });
 
