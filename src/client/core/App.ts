@@ -240,35 +240,6 @@ export default class App {
         App.getInstance().disableInputs(!App.getInstance().isInControl);
     }
 
-    private getRole(role: PlayerRole): string {
-        const element = document.createElement('div') as HTMLDivElement;
-
-        switch(role) {
-            case PlayerRole.SMALL_BLIND:
-                element.textContent = "Small Blind";
-                element.classList.add("alert");
-                element.classList.add("alert-warning")
-                break;
-            case PlayerRole.BIG_BLIND:
-                element.textContent = "Big Blind";
-                element.classList.add("alert");
-                element.classList.add("alert-success")
-                break;
-        }
-
-        return element.outerHTML;
-    }
-
-    private clearRoles(): void {
-        /*for(var i = 0; true; i++) {
-            if(App.getInstance().table.getRow(i) == undefined) {
-                break;
-            }
-
-            App.getInstance().table.editRowValueByIdx(i, "Rolle", "");
-        }*/
-    }
-
     private recieve(m: ServerMessage): void {
         console.log("Neue Nachricht vom Server");
         console.log(m);
@@ -338,7 +309,6 @@ export default class App {
                     App.getInstance().fragenTable.addRow(m.phase, m.phase.replace("_", ""), m.hinweis);
                 } else {
                     App.getInstance().fragenTable.clearRows();
-                    App.getInstance().clearRoles();
                 }
                 break;
 
@@ -360,14 +330,6 @@ export default class App {
 
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();
-                break;
-
-            case ServerEvents.ROLES_SELECTED:
-                App.getInstance().clearRoles();
-
-                /*TODO: 
-                App.getInstance().table.editRowValueByValue(m.small_blind.toString(), "Rolle", App.getInstance().getRole(PlayerRole.SMALL_BLIND));
-                App.getInstance().table.editRowValueByValue(m.big_blind.toString(), "Rolle", App.getInstance().getRole(PlayerRole.BIG_BLIND));*/
                 break;
         }
     }

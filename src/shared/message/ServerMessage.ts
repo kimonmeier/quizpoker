@@ -79,13 +79,6 @@ interface PlayerControlEvent {
     member_id: number,
     minimumBet: number;
 }
-
-interface PlayerRolesSelectedEvent {
-    type: ServerEvents.ROLES_SELECTED,
-    small_blind: number,
-    big_blind: number;
-}
-
 interface PlayerWonEvent {
     type: ServerEvents.PLAYER_WON,
     id: number,
@@ -112,4 +105,4 @@ export enum MemberStatus {
 }
 
 
-export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerRolesSelectedEvent | PlayerWonEvent;
+export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerWonEvent;
