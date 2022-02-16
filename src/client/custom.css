@@ -91,7 +91,7 @@
     position: absolute;
     margin-left: 10px;
     width: 75px;
-    background-color: green;
+    background-color: grey;
     border: 1px solid white;
     border-radius: 5px;
     padding: 5px;
@@ -103,7 +103,7 @@
     position: absolute;
     margin-left: 112.5px;
     width: 225px;
-    background-color: green;
+    background-color: goldenrod;
     border: 1px solid white;
     border-radius: 5px;
     padding: 5px;
