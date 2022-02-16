@@ -59,7 +59,6 @@ export default class App {
     private maxChips: number = 10000;
     private pot: number = 0;
     private isInControl: boolean = false;
-    private lastBet: number = 0;
     private status: MemberStatus = MemberStatus.ON;
 
     private constructor() {
@@ -214,14 +213,14 @@ export default class App {
     }
 
     private setLastBet(lastBet: number): void {
-        App.getInstance().lastBet = lastBet; 
-
         App.getInstance().raiseRangeInput.min = (lastBet + 50).toString();
         App.getInstance().raiseTextInput.value = (lastBet + 50).toString();
     }
 
     private setPot(pot: number): void{
         this.pot = pot;
+
+        document.getElementById("pot")!.innerText = this.pot.toString();
     }
 
     private setMaxChips(maxChips: number): void {
@@ -278,7 +277,6 @@ export default class App {
                 document.getElementById(App.EINSATZ_PREFIX + m.id.toString())!.innerText = m.einsatz.toString();
 
                 if(!m.hasControls || m.status == MemberStatus.FOLDED) {
-                    document.getElementById
                     //TODO: App.getInstance().table.unhighlightRowByValue(m.id.toString());
                 }
 
