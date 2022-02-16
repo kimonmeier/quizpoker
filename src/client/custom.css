@@ -42,6 +42,10 @@
     overflow: hidden;
 }
 
+.public {
+    height: 95% !important;
+}
+
 .bottom {
     display: inline;
     position: absolute;
