@@ -3,7 +3,7 @@
 }
 
 .hg_folded {
-    background: rgba(red, 0, 0, 0.1);
+    background-color: red !important;
 }
 
 #bets {
