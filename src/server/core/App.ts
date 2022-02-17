@@ -299,7 +299,7 @@ export default class App {
                     this.WebSocket.broadcast({
                         type: ServerEvents.PLAYER_HAS_CONTROLS,
                         member_id: this.currentPlayer,
-                        minimumBet: 0
+                        minimumBet: this.GameManager.getBetValues(this.lastControlled)
                     });
                 
                 this.WebSocket.broadcast({
