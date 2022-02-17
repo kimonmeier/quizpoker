@@ -30,7 +30,7 @@ export default class App {
     + '             0'
     + '         </div>'
     + '         <div id="' + this.SCHAETZUNG_PREFIX + '{{playerId}}" class="schaetzung">'
-    + '             0'
+    + '             Schätzung'
     + '         </div>'
     + '         <div id="' + this.EINSATZ_PREFIX + '{{playerId}}" class="einsatz">'
     + '             0'
