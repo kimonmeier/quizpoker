@@ -94,8 +94,8 @@ export default class App {
             { name: "Wert" }
         );
 
-        (document.getElementById("nachdenkmusik") as HTMLAudioElement).volume = 0.3;
-        (document.getElementById("antwortmusik") as HTMLAudioElement).volume = 0.5;
+        (document.getElementById("nachdenkmusik") as HTMLAudioElement).volume = 0.15;
+        (document.getElementById("antwortmusik") as HTMLAudioElement).volume = 0.2;
     }
 
     private registerListener(): void {        
