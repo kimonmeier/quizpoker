@@ -5,7 +5,7 @@ import Bet from "@shared/entities/Bet";
 import { ClientEvents } from "@shared/enums/ClientEvents";
 import { ServerEvents } from "@shared/enums/ServerEvents";
 import { ClientMessage, GameMasterAction, MemberAction } from "@shared/message/ClientMessage";
-import { FragenPhase, MemberStatus } from "@shared/message/ServerMessage";
+import { FragenPhase, GamePhase, MemberStatus } from "@shared/message/ServerMessage";
 import { runInThisContext } from "vm";
 import Cache, { Frage } from "./Cache";
 
@@ -141,6 +141,12 @@ export default class App {
                                 status: MemberStatus.ON
                             });
 
+                            this.WebSocket.broadcast({
+                                type: ServerEvents.UPDATED_GAME_VALUES,
+                                phase: GamePhase.ROUND,
+                                pot: this.GameManager.getPot()
+                            });
+
                             break;
 
                         case GameMasterAction.SHOW_HINWEIS:
@@ -229,6 +235,13 @@ export default class App {
                                     status: x[1].chips > 0 ? MemberStatus.ON : MemberStatus.PLEITE
                                 })
                             })
+
+                        case GameMasterAction.SHOW_SCHAETZUNG:
+                            this.WebSocket.broadcast({
+                                type: ServerEvents.SHOW_SCHAETZUNG,
+                                id: message.member_id!,
+                                schaetzung: Cache.getInstance().getSchaetzung(message.member_id!)
+                            })
                     }
 
                     break;
@@ -292,7 +305,7 @@ export default class App {
                 this.WebSocket.broadcast({
                     type: ServerEvents.UPDATED_GAME_VALUES,
                     phase: 0,
-                    pot: this.GameManager.getPot()
+                    pot: 0
                 })
             }
         });
