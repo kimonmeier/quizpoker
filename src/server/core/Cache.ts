@@ -62,7 +62,7 @@ export default class Cache {
     }
 
     public getSchaetzung(memberId: number): number {
-        return this.schaetzungen.filter(x => x[0] == memberId)[0][0];
+        return this.schaetzungen.filter(x => x[0] == memberId)[0][1];
     }
 
     public setSchaetzung(id: number, schaetzung: number): void {
