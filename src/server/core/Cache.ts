@@ -64,6 +64,10 @@ export default class Cache {
     }
 
     public getSchaetzung(memberId: number): number {
+        if(this.schaetzungen.filter(x => x[0] == memberId)[0] == null || this.schaetzungen.filter(x => x[0] == memberId)[0] == undefined) {
+            return 0;
+        }
+
         return this.schaetzungen.filter(x => x[0] == memberId)[0][1];
     }
 
