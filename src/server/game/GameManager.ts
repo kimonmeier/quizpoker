@@ -115,7 +115,10 @@ export default class GameManager {
         var nextPlayer: number | null = null;
         var currentId: number = lastPlayer + 1;
 
+        console.log("Highest ID: " +  Cache.getInstance().getHighestId());
+
         do {
+            console.log("Loop: " + currentId);
             if(Cache.getInstance().getHighestId() >= currentId) {
                 currentId = 0;
             }
