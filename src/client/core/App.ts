@@ -276,7 +276,23 @@ export default class App {
                     App.getInstance().setHasControls(m.hasControls, 0);
                 }
 
-                document.getElementById(App.CHIP_PREFIX + m.id.toString())!.innerText = m.chips.toString();
+                if(m.chips == 0 && m.status != MemberStatus.PLEITE) {
+                    if(!document.getElementById(App.CHIP_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {
+                        document.getElementById(App.CHIP_PREFIX + m.id.toString())!.classList.add(HighlightColor.FOLDED);
+                    }
+                    document.getElementById(App.CHIP_PREFIX + m.id.toString())!.innerText = "All-In";
+                } else {
+                    if(document.getElementById(App.CHIP_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {
+                        document.getElementById(App.CHIP_PREFIX + m.id.toString())!.classList.remove(HighlightColor.FOLDED);
+                    }
+
+                    if(m.status == MemberStatus.PLEITE) {
+                        document.getElementById(App.CHIP_PREFIX + m.id.toString())!.innerText = "0";
+                    } else {
+                        document.getElementById(App.CHIP_PREFIX + m.id.toString())!.innerText = m.chips.toString();
+                    }
+                }
+
                 document.getElementById(App.EINSATZ_PREFIX + m.id.toString())!.innerText = m.einsatz.toString();
                 (document.getElementById(App.SCHAETZUNG_PREFIX + m.id))!.innerText = "Schaetzung";
 
