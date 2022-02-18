@@ -253,7 +253,11 @@ export default class App {
 
                     switch(message.action) {
                         case MemberAction.CALL:
-                            newBet.bet = this.GameManager.getBetValues(this.lastControlled) - this.GameManager.getBetValues(userId);
+                            if(this.GameManager.getChipsById(userId) < this.GameManager.getBetValues(this.lastControlled)) {
+                                newBet.bet = this.GameManager.getChipsById(userId) - this.GameManager.getBetValues(userId);
+                            } else {
+                                newBet.bet = this.GameManager.getBetValues(this.lastControlled) - this.GameManager.getBetValues(userId);
+                            }
                             this.GameManager.addBet(newBet);
 
                             this.WebSocket.broadcast({

@@ -133,6 +133,10 @@ export default class GameManager {
 
         return nextPlayer;
     }
+
+    public getChipsById(id: number): number {
+        return Cache.getInstance().getClientCacheById(id)?.chips ?? 0;
+    }
 }
 
 interface RoleClass {

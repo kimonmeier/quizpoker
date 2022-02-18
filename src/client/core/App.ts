@@ -203,7 +203,7 @@ export default class App {
     }
 
     private setId(id: number): void {
-        App.getInstance().id = id;
+        this.id = id;
 
         document.getElementById("btnLogin")!.hidden = true;
 
@@ -216,8 +216,8 @@ export default class App {
     }
 
     private setLastBet(lastBet: number): void {
-        App.getInstance().raiseRangeInput.min = (lastBet + 50).toString();
-        App.getInstance().raiseTextInput.value = (lastBet + 50).toString();
+        this.raiseRangeInput.min = (lastBet + 50).toString();
+        this.raiseTextInput.value = (lastBet + 50).toString();
     }
 
     private setPot(pot: number): void{
@@ -233,13 +233,13 @@ export default class App {
     }
 
     private setHasControls(setHasControls: boolean, minimumBet: number): void {
-        App.getInstance().isInControl = setHasControls;
+        this.isInControl = setHasControls;
 
-        if(App.getInstance().isInControl) {
-            App.getInstance().setLastBet(minimumBet);
+        if(this.isInControl) {
+            this.setLastBet(minimumBet);
         }
 
-        App.getInstance().disableInputs(!App.getInstance().isInControl);
+        this.disableInputs(!this.isInControl);
     }
 
     private recieve(m: ServerMessage): void {
@@ -280,10 +280,6 @@ export default class App {
                 document.getElementById(App.EINSATZ_PREFIX + m.id.toString())!.innerText = m.einsatz.toString();
                 (document.getElementById(App.SCHAETZUNG_PREFIX + m.id))!.innerText = "Schaetzung";
 
-                if(!m.hasControls || m.status == MemberStatus.FOLDED) {
-                    //TODO: App.getInstance().table.unhighlightRowByValue(m.id.toString());
-                }
-
                 if(m.status == MemberStatus.PLEITE) {
                     if(!document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {
                         document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.add(HighlightColor.FOLDED);
@@ -295,6 +291,8 @@ export default class App {
                         document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.add(HighlightColor.FOLDED);
                     }
                     document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.innerText = "Folded";
+                } else {
+                    document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.remove(HighlightColor.FOLDED);
                 }
 
                 break;
@@ -327,7 +325,6 @@ export default class App {
                     App.getInstance().disableSchaetzungen(false, true);
                 }
                 
-                //TODO: App.getInstance().table.unhighlightRows();
                 App.getInstance().fragenTable.clearRows();
                 App.getInstance().fragenTable.addRow(m.phase, m.phase.replace("_", ""), m.frage);
 
@@ -336,7 +333,6 @@ export default class App {
             
             case ServerEvents.PLAYER_HAS_CONTROLS:
                 App.getInstance().setHasControls(m.member_id == App.getInstance().id, m.minimumBet);
-                //TODO: App.getInstance().table.highlightRowByValue(m.member_id.toString(), HighlightColor.SELECTED);
 
             case ServerEvents.GAME_STARTED:
                 App.getInstance().visibleControls();
