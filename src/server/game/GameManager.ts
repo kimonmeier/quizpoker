@@ -6,7 +6,7 @@ import { MemberStatus } from "@shared/message/ServerMessage";
 export default class GameManager {
 
     private bets: Bet[] = [];
-    private roles: RoleClass= { Small_Blind: 1, Big_Blind: 0 };
+    private roles: RoleClass= { Small_Blind: 0, Big_Blind: 0 };
 
     public getBetValues(userId: number): number {
         var bettedChips = 0;
