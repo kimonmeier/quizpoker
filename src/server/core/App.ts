@@ -36,11 +36,11 @@ export default class App {
                             type: ServerEvents.NEW_MITGLIED,
                             id: element[0],
                             name: element[1].name,
-                            link: message.link
+                            link: element[1].link,
                         })
                     });
                 
-                    var id: number = Cache.getInstance().addClient({ chips: 10000, name: message.name, client: client, status: MemberStatus.ON });
+                    var id: number = Cache.getInstance().addClient({ chips: 10000, name: message.name, client: client, status: MemberStatus.ON, link: message.link });
                     client.send({ type: ServerEvents.MITGLIED_SUCCESSFULL_LOGIN, id: id });
                     this.WebSocket.broadcast({type: ServerEvents.NEW_MITGLIED, id: id, name: message.name, link: message.link});
                     break;

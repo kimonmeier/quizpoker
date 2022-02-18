@@ -130,6 +130,7 @@ export default class Cache {
 export interface ClientCache {
     client: WebSocketClient,
     name: string,
+    link: string,
     chips: number,
     status: MemberStatus
 }
