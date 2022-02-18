@@ -94,17 +94,7 @@ export default class GameManager {
 
         this.roles.Big_Blind = this.roles.Small_Blind;
 
-        var indexOfSmallBlind: number | undefined = membersPlaying.find(x => x == this.roles.Small_Blind) == undefined ? 0 : membersPlaying.find(x => x == this.roles.Small_Blind);
-
-        if(indexOfSmallBlind == -1) {
-            throw new Error("No valid index found")
-        }
-
-        if(membersPlaying.length <= indexOfSmallBlind!) {
-            indexOfSmallBlind = 0;
-        }
-
-        this.roles.Small_Blind = membersPlaying[indexOfSmallBlind!];
+        this.roles.Small_Blind = this.getNextPlayerById(this.roles.Big_Blind);
     }
 
     public getBigBlind(): number {
@@ -118,12 +108,21 @@ export default class GameManager {
     public getNextPlayer(): number {
         const lastPlayer = this.bets[this.bets.length - 1].player_id;
 
+        return this.getNextPlayerById(lastPlayer);
+    }
+
+    private getNextPlayerById(lastPlayer: number): number {
         var nextPlayer: number | null = null;
         var currentId: number = lastPlayer + 1;
 
         do {
-            if(Cache.getInstance().getClientCacheById(currentId) == null) {
+            if(Cache.getInstance().getHighestId() > currentId) {
                 currentId = 1;
+            }
+
+            if(Cache.getInstance().getClientCacheById(currentId) == null) {
+                currentId += 1;
+                continue;
             }
 
             if(Cache.getInstance().getClientCacheById(currentId)!.chips > 0) {

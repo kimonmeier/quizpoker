@@ -129,6 +129,20 @@ export default class Cache {
     public getAll(): [number, ClientCache][] {
         return this.clients;
     }
+
+    public getHighestId(): number {
+        var highestId = 0;
+
+        for (let index = 0; index < this.clients.length; index++) {
+            const element = this.clients[index];
+
+            if(element[0] >= highestId) {
+                highestId = element[0];
+            }
+        }
+
+        return highestId;
+    }
 }
 
 export interface ClientCache {
