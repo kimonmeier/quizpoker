@@ -308,8 +308,8 @@ export default class App {
                 
                 this.WebSocket.broadcast({
                     type: ServerEvents.UPDATED_GAME_VALUES,
-                    phase: 0,
-                    pot: 0
+                    phase: GamePhase.ROUND,
+                    pot: this.GameManager.getPot()
                 })
             }
         });

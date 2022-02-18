@@ -45,16 +45,11 @@ export default class GameManager {
     }
 
     public getPot(): number {
-        console.log(this.bets);
         var pot = 0;
 
         this.bets.forEach((element) => {
-            console.log("Pot: " + pot);
-            console.log("Bet: " + element.bet);
             pot += element.bet;
-        })
-
-        console.log("Final Pot: " + pot);        
+        })   
 
         return pot;
     }
