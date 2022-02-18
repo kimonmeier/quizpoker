@@ -84,6 +84,7 @@ export default class GameManager {
     }
 
     public forwardRoles(): void {
+        console.log("Forward Roles");
         const membersPlaying: number[] = [];
 
         Cache.getInstance().getAll().forEach((client) => {
@@ -92,9 +93,15 @@ export default class GameManager {
             }
         });
 
+        console.log(membersPlaying);
+
         this.roles.Big_Blind = this.roles.Small_Blind;
 
+        console.log("Role big blind:" + this.roles);
+
         this.roles.Small_Blind = this.getNextPlayerById(this.roles.Big_Blind);
+
+        console.log("Role Small_Blind:" + this.roles);
     }
 
     public getBigBlind(): number {
