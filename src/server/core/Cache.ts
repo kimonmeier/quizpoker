@@ -1,5 +1,6 @@
 import WebSocketClient from "@server/connection/WebSocketClient";
 import { MemberStatus } from "@shared/message/ServerMessage";
+import ArrayHelper from "@shared/utils/ArrayUtils";
 import * as fragen from "./frage.json";
 
 export default class Cache {
@@ -35,7 +36,8 @@ export default class Cache {
                 used: false
             })
         }
-            
+
+        this.fragen = ArrayHelper.shuffleArray(this.fragen);
     }
 
     public getLastFrage(): Frage | null {
