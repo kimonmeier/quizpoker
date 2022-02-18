@@ -125,8 +125,8 @@ export default class GameManager {
         console.log("Highest ID: " +  Cache.getInstance().getHighestId());
 
         do {
-            //console.log("Loop: " + currentId);
-            if(Cache.getInstance().getHighestId() >= currentId) {
+            console.log("Loop: " + currentId);
+            if(Cache.getInstance().getHighestId() < currentId) {
                 currentId = 0;
             }
 
