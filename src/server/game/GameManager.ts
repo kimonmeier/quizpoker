@@ -87,7 +87,9 @@ export default class GameManager {
         const membersPlaying: number[] = [];
 
         Cache.getInstance().getAll().forEach((client) => {
-            membersPlaying.push(client[0]);
+            if(client[1].status != MemberStatus.PLEITE) {
+                membersPlaying.push(client[0]);
+            }
         });
 
         this.roles.Big_Blind = this.roles.Small_Blind;
