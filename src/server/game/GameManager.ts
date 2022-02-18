@@ -6,7 +6,7 @@ import { MemberStatus } from "@shared/message/ServerMessage";
 export default class GameManager {
 
     private bets: Bet[] = [];
-    private roles: RoleClass= { Small_Blind: 2, Big_Blind: 1 };
+    private roles: RoleClass= { Small_Blind: 1, Big_Blind: 0 };
 
     public getBetValues(userId: number): number {
         var bettedChips = 0;
@@ -116,8 +116,8 @@ export default class GameManager {
         var currentId: number = lastPlayer + 1;
 
         do {
-            if(Cache.getInstance().getHighestId() > currentId) {
-                currentId = 1;
+            if(Cache.getInstance().getHighestId() >= currentId) {
+                currentId = 0;
             }
 
             if(Cache.getInstance().getClientCacheById(currentId) == null) {
