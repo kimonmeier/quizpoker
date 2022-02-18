@@ -37,7 +37,7 @@ export default class Cache {
             })
         }
 
-        this.fragen = ArrayHelper.shuffleArray(this.fragen);
+        //this.fragen = ArrayHelper.shuffleArray(this.fragen);
     }
 
     public getLastFrage(): Frage | null {

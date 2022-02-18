@@ -84,7 +84,6 @@ export default class GameManager {
     }
 
     public forwardRoles(): void {
-        console.log("Forward Roles");
         const membersPlaying: number[] = [];
 
         Cache.getInstance().getAll().forEach((client) => {
@@ -93,15 +92,9 @@ export default class GameManager {
             }
         });
 
-        console.log(membersPlaying);
-
         this.roles.Big_Blind = this.roles.Small_Blind;
 
-        console.log("Role big blind:" + this.roles);
-
         this.roles.Small_Blind = this.getNextPlayerById(this.roles.Big_Blind);
-
-        console.log("Role Small_Blind:" + this.roles);
     }
 
     public getBigBlind(): number {
@@ -122,10 +115,7 @@ export default class GameManager {
         var nextPlayer: number | null = null;
         var currentId: number = lastPlayer + 1;
 
-        console.log("Highest ID: " +  Cache.getInstance().getHighestId());
-
         do {
-            console.log("Loop: " + currentId);
             if(Cache.getInstance().getHighestId() < currentId) {
                 currentId = 0;
             }
