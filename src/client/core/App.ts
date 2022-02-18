@@ -69,7 +69,7 @@ export default class App {
         this.declareVariables();
         this.registerListener();
 
-        this.disableInputs(true);
+        this.disableInputs(true, false);
         this.disableSchaetzungen(true, false);
 
         this.client = new WebSocketClient("wss://gameshow.k-meier.ch");
@@ -194,11 +194,15 @@ export default class App {
         }
     }
 
-    private disableInputs(locked: boolean): void {
+    private disableInputs(locked: boolean, allIn: boolean): void {
         if(locked) {
             $("#game-controls").find("button, input").attr("disabled", "disabled");
         } else {
             $("#game-controls").find("button, input").removeAttr("disabled");
+
+            if(allIn) {
+                $("#btnRaise").attr("disabled", "disabled");
+            }
         }
     }
 
@@ -239,7 +243,15 @@ export default class App {
             this.setLastBet(minimumBet);
         }
 
-        this.disableInputs(!this.isInControl);
+        this.disableInputs(!this.isInControl, minimumBet >= this.maxChips);
+
+        
+        if(minimumBet >= this.maxChips) {
+            document.getElementById("btnCall")!.innerText = "All-In";
+        } else {
+            document.getElementById("btnCall")!.innerText = "Call";
+        }
+
     }
 
     private recieve(m: ServerMessage): void {
