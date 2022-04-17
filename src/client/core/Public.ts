@@ -163,9 +163,7 @@ export default class App {
                     }
                     document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.innerText = "Folded";
                 } else {
-                    if(!document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {
-                        document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.remove(HighlightColor.FOLDED);
-                    }
+                    document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.remove(HighlightColor.FOLDED);
                 }
 
                 break;

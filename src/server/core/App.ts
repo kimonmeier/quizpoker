@@ -97,6 +97,8 @@ export default class App {
                                 })
                             })
 
+                            Cache.getInstance().clearSchaetzungen();
+
                             let frage = Cache.getInstance().getUnusedFragen();
                             this.GameManager.clearBets();
 
