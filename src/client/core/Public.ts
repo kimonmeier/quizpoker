@@ -111,7 +111,11 @@ export default class App {
                 }
 
                 console.log("Neues Mitglied beigetreten!");
-                
+            
+                if(App.getInstance().currentGameState != GamePhase.START) {
+                    return;
+                }
+
                 document.getElementById("teilnehmer")!.innerHTML += App.PLAYER_TEMPLATE.replaceAll("{{playerId}}", m.id.toString()).replaceAll("{{link}}", m.link); 
 
                 document.getElementById(App.CHIP_PREFIX + m.id.toString())!.textContent = App.getInstance().maxChips.toString();
