@@ -41,7 +41,7 @@ export default class GameManager {
     }
 
     public getRemainingChips(userId: number): number {
-        return Cache.getInstance().getClientCacheById(userId)!.chips - this.getBetValues(userId);
+        return Cache.getInstance().getClientCacheById(userId)?.chips ?? 10000 - this.getBetValues(userId);
     }
 
     public getPot(): number {
