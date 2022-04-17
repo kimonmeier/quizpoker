@@ -2,9 +2,10 @@ import { PlayerRole } from "../../shared/enums/PlayerRole";
 import { ClientEvents } from "../../shared/enums/ClientEvents";
 import { ServerEvents } from "../../shared/enums/ServerEvents";
 import { MemberAction } from "../../shared/message/ClientMessage";
-import { FragenPhase, MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
+import { FragenPhase, GamePhase, MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
 import WebSocketClient from "../connection/WebSocketClient";
 import CustomHTMLTable, { HighlightColor } from "./CustomHTMLTable";
+import { GameType } from "@shared/enums/GameType";
 
 const roundToNearest5 = (x: number) => Math.round(x/50)*50;
 
@@ -21,10 +22,11 @@ export default class App {
     private static readonly SCHAETZUNG_PREFIX: string = "schaetzung_";
     private static readonly EINSATZ_PREFIX: string = "einsatz_";
     private static readonly PLAYER_PREFIX: string = "player_";
+    private static readonly CAM_PREFIX: string = "cam_";
 
     private static readonly PLAYER_TEMPLATE: string = ''
     + '<div id="' + this.PLAYER_PREFIX + '{{playerId}}" class="player">'
-    + ' <iframe src="{{link}}" frameborder="0" allow="autoplay" class="player-cam"></iframe>'
+    + ' <iframe id="' + this.CAM_PREFIX + '" src="{{link}}" frameborder="0" allow="autoplay" class="player-cam"></iframe>'
     + '     <div class="player-infos">'
     + '         <div id="' + this.CHIP_PREFIX + '{{playerId}}" class="chips">'
     + '             0'
@@ -37,6 +39,8 @@ export default class App {
     + '         </div>'
     + '     </div>'
     + '</div>';
+
+    private static readonly EMPTY_CAM_TEMPALTE: string = '<img id="' + this.CAM_PREFIX + '{{playerId}}" src="{{baseUrl}}/assets/emptyCam.png"></img>'
 
     private static instance: App;
 
@@ -51,10 +55,10 @@ export default class App {
     private client!: WebSocketClient;
 
     private fragenTable!: CustomHTMLTable;
-    private id: number = 0;
     private maxChips: number = 10000;
     private pot: number = 0;
     private lastControlled: number = 0;
+    private currentGameState: GamePhase = GamePhase.PAUSE;
 
     private constructor() {
         App.instance = this;
@@ -110,12 +114,19 @@ export default class App {
                 
                 document.getElementById("teilnehmer")!.innerHTML += App.PLAYER_TEMPLATE.replaceAll("{{playerId}}", m.id.toString()).replaceAll("{{link}}", m.link); 
 
-                document.getElementById(App.CHIP_PREFIX + m.id.toString())!.textContent = "10000";
+                document.getElementById(App.CHIP_PREFIX + m.id.toString())!.textContent = App.getInstance().maxChips.toString();
                 break;
 
             case ServerEvents.REMOVED_MITGLIED:
                 console.log("Mitglied wurde entfernt!");
-                document.getElementById(App.PLAYER_PREFIX + m.id.toString())!.remove();
+
+                if(App.getInstance().currentGameState != GamePhase.START) {
+                    document.getElementById(App.PLAYER_PREFIX + m.id.toString())!.removeChild(document.getElementById(App.CAM_PREFIX + m.id.toString())!)
+                    
+                    document.getElementById(App.PLAYER_PREFIX + m.id.toString())!.innerHTML += App.EMPTY_CAM_TEMPALTE.replace("{{playerId}}", m.id.toString()).replace("{{baseUrl}}", document.baseURI);
+                } else {
+                    document.getElementById(App.PLAYER_PREFIX + m.id.toString())!.remove();
+                }
                 break;
                 
             case ServerEvents.UPDATED_MITGLIED_VALUES:
@@ -135,10 +146,6 @@ export default class App {
                     }
                 }
                 document.getElementById(App.EINSATZ_PREFIX + m.id.toString())!.innerText = m.einsatz.toString();
-
-                if(!m.hasControls || m.status == MemberStatus.FOLDED) {
-                    //TODO: App.getInstance().table.unhighlightRowByValue(m.id.toString());
-                }
 
                 if(m.status == MemberStatus.PLEITE) {
                     if(!document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {

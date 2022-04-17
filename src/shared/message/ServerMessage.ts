@@ -101,8 +101,10 @@ export enum FragenPhase {
 }
 
 export enum GamePhase {
+    START,
     ROUND,
-    PAUSE
+    PAUSE,
+    END
 }
 
 export enum MemberStatus {
