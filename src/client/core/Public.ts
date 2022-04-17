@@ -58,7 +58,7 @@ export default class App {
     private maxChips: number = 10000;
     private pot: number = 0;
     private lastControlled: number = 0;
-    private currentGameState: GamePhase = GamePhase.PAUSE;
+    private currentGameState: GamePhase = GamePhase.START;
 
     private constructor() {
         App.instance = this;
