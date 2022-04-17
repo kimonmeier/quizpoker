@@ -1,5 +1,5 @@
-.hg_grey {
-    background: rgba(255, 255, 255, 0.2);
+.hg_selected {
+    background-color: gold !important;
 }
 
 .hg_folded {
@@ -11,6 +11,7 @@
     overflow-y: scroll;
     overflow-x: auto;
 }
+
 .left {
     display: inline;
     border: 2px solid black;
@@ -137,7 +138,7 @@
         height: 340px;
     }
 
-    .player-infos { 
+    .player-infos {
         width: 600px;
         height: 60px;
         font-size: large;

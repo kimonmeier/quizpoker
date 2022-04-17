@@ -54,6 +54,7 @@ export default class App {
     private id: number = 0;
     private maxChips: number = 10000;
     private pot: number = 0;
+    private lastControlled: number = 0;
 
     private constructor() {
         App.instance = this;
@@ -150,6 +151,10 @@ export default class App {
                         document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.add(HighlightColor.FOLDED);
                     }
                     document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.innerText = "Folded";
+                } else {
+                    if(!document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.contains(HighlightColor.FOLDED)) {
+                        document.getElementById(App.SCHAETZUNG_PREFIX + m.id.toString())!.classList.remove(HighlightColor.FOLDED);
+                    }
                 }
 
                 break;
@@ -169,6 +174,15 @@ export default class App {
                     (document.getElementById("nachdenkmusik") as HTMLAudioElement).pause();
                     (document.getElementById("antwortmusik") as HTMLAudioElement).play();
                 }
+                break;
+
+            case ServerEvents.PLAYER_HAS_CONTROLS:
+                if(m.member_id != 0) {
+                    document.getElementById(App.SCHAETZUNG_PREFIX + App.getInstance().lastControlled.toString())!.classList.remove(HighlightColor.SELECTED);
+                }
+                document.getElementById(App.SCHAETZUNG_PREFIX + m.member_id.toString())!.classList.add(HighlightColor.SELECTED);
+
+                App.getInstance().lastControlled = m.member_id;
                 break;
 
             case ServerEvents.NAECHSTE_FRAGE:                

@@ -233,5 +233,5 @@ export interface RowHeader {
 
 export enum HighlightColor {
     FOLDED = "hg_folded",
-    SELECTED = "hg_grey"
+    SELECTED = "hg_selected"
 }
