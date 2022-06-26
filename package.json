@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "Eine Gameshowwebseite welche über Websockets funktioniert",
   "scripts": {
+    "lint": "eslint src/**/*.ts",
     "client:dev": "parcel ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
-    "client:build": "parcel build ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
+    "client:build": "npm run lint && parcel build ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
     "server:dev": "npx nodemon ",
-    "server:build": "tsc --project tsconfig.json && npx tscpaths -p tsconfig.json -s ./src -o ./dist"
+    "server:build": "npm run lint && tsc --project tsconfig.json && npx tscpaths -p tsconfig.json -s ./src -o ./dist"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,13 @@
     "ts-loader": "^9.2.4",
     "ts-node": "^10.2.0",
     "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2"
   },
   "dependencies": {
     "shared": "^0.2.0",
