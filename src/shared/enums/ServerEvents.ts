@@ -28,5 +28,7 @@ export enum ServerEvents {
 
     PLAYER_WON,
 
-    SHOW_SCHAETZUNG
+    SHOW_SCHAETZUNG,
+
+    MEMBER_KICK
 }

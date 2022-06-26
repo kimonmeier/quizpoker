@@ -125,7 +125,8 @@ export default class GameManager {
                 continue;
             }
 
-            if(Cache.getInstance().getClientCacheById(currentId)!.chips > 0) {
+            if(Cache.getInstance().getClientCacheById(currentId)!.chips > 0 
+            && Cache.getInstance().getClientCacheById(currentId)?.status == MemberStatus.ON) {
                 nextPlayer = currentId;
             }
 

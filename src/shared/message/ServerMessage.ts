@@ -23,6 +23,11 @@ interface RemoveMemberEvent {
     id:number
 }
 
+interface MemberKickEvent {
+    type: ServerEvents.MEMBER_KICK,
+    id: number
+}
+
 interface MemberUpdateValuesEvent {
     type: ServerEvents.UPDATED_MITGLIED_VALUES,
     id: number,
@@ -114,4 +119,4 @@ export enum MemberStatus {
 }
 
 
-export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerWonEvent | ShowSchaetzungEvent;
+export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerWonEvent | ShowSchaetzungEvent | MemberKickEvent;

@@ -38,6 +38,15 @@ export default class App {
                             name: element[1].name,
                             link: element[1].link,
                         })
+
+                        client.send({
+                            type: ServerEvents.UPDATED_MITGLIED_VALUES,
+                            chips: this.GameManager.getRemainingChips(element[0]),
+                            einsatz: this.GameManager.getBetValues(element[0]),
+                            hasControls:this.currentPlayer == element[0],
+                            id: element[0],
+                            status: Cache.getInstance().getClientCacheById(element[0])!.status
+                        })
                     });
                 
                     var id: number = Cache.getInstance().addClient({ chips: 10000, name: message.name, client: client, status: MemberStatus.ON, link: message.link });
