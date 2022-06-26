@@ -1,4 +1,3 @@
-import { PlayerRole } from "@shared/enums/PlayerRole";
 import { ServerEvents } from "@shared/enums/ServerEvents";
 
 interface PingServerEvent {

@@ -1,7 +1,7 @@
-import WebSocketClient from "@client/connection/WebSocketClient";
-import { ClientEvents } from "@shared/enums/ClientEvents";
-import { ServerEvents } from "@shared/enums/ServerEvents";
-import { FragenPhase, GamePhase, MemberStatus, ServerMessage } from "@shared/message/ServerMessage";
+import WebSocketClient from "../connection/WebSocketClient";
+import { ClientEvents } from "../../shared/enums/ClientEvents";
+import { ServerEvents } from "../../shared/enums/ServerEvents";
+import { FragenPhase, GamePhase, MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
 import CustomHTMLTable, { HighlightColor } from "./CustomHTMLTable";
 
 export abstract class SharedApp {
@@ -30,11 +30,11 @@ export abstract class SharedApp {
     protected static readonly EMPTY_CAM_TEMPALTE: string = '<img id="' + this.CAM_PREFIX + '{{playerId}}" src="{{baseUrl}}/assets/emptyCam.png"></img>'
 
     protected fragenTable!: CustomHTMLTable;
-    protected maxChips: number = 10000;
-    protected pot: number = 0;
-    protected lastControlled: number = 0;
+    protected maxChips = 10000;
+    protected pot = 0;
+    protected lastControlled = 0;
     protected currentGameState: GamePhase = GamePhase.START;
-    protected id: number = -1;
+    protected id = -1;
 
     protected instance!: SharedApp;
     protected client!: WebSocketClient;

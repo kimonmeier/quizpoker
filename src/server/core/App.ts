@@ -12,8 +12,8 @@ import Cache, { Frage } from "./Cache";
 export default class App {
     public readonly WebSocket: WebSocketConnection;
     public readonly GameManager: GameManager;
-    public lastControlled: number = 0;
-    public currentPlayer: number = 0;
+    public lastControlled = 0;
+    public currentPlayer = 0;
 
     public constructor() {
         this.WebSocket = new WebSocketConnection();
@@ -108,7 +108,7 @@ export default class App {
 
                             Cache.getInstance().clearSchaetzungen();
 
-                            let frage = Cache.getInstance().getUnusedFragen();
+                            const frage = Cache.getInstance().getUnusedFragen();
                             this.GameManager.clearBets();
 
                             this.GameManager.forwardRoles();
@@ -163,7 +163,7 @@ export default class App {
                         case GameMasterAction.SHOW_HINWEIS:
                             const old_frage: Frage = Cache.getInstance().getLastFrage()!;
 
-                            var hinweisToSend: string = "";
+                            var hinweisToSend = "";
                             
                             switch(message.phase as FragenPhase) {
                                 case FragenPhase.FRAGE:

@@ -14,7 +14,7 @@ export default class WebSocketClient {
 	}
 
     public recieve(m: ServerMessage): void {
-        
+        console.log(m);
     }
 
 	public get isOpen(): boolean {

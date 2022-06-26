@@ -32,7 +32,7 @@ export default class WebSocketConnection
 	}
 
 	public broadcastExcept(m: ServerMessage, ... clients:  WebSocketClient[]): void {
-		let arrays = new Array();
+		const arrays = [];
 		this._clients.forEach(element => {
 			if(!clients.includes(element, 0)) {
 				arrays.push(element);

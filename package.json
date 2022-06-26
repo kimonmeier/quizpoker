@@ -3,11 +3,10 @@
   "version": "0.0.1",
   "description": "Eine Gameshowwebseite welche über Websockets funktioniert",
   "scripts": {
-    "lint": "eslint src/**/*.ts",
     "client:dev": "parcel ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
-    "client:build": "npm run lint && parcel build ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
+    "client:build": "parcel build ./src/client/index.html ./src/client/gamemaster.html ./src/client/public.html",
     "server:dev": "npx nodemon ",
-    "server:build": "npm run lint && tsc --project tsconfig.json && npx tscpaths -p tsconfig.json -s ./src -o ./dist"
+    "server:build": "tsc --project tsconfig.json && npx tscpaths -p tsconfig.json -s ./src -o ./dist"
   },
   "repository": {
     "type": "git",

@@ -9,7 +9,7 @@ export default class GameManager {
     private roles: RoleClass= { Small_Blind: 0, Big_Blind: 0 };
 
     public getBetValues(userId: number): number {
-        var bettedChips = 0;
+        let bettedChips = 0;
 
         this.bets.forEach((element) => {
             if(element.player_id == userId) {
@@ -45,7 +45,7 @@ export default class GameManager {
     }
 
     public getPot(): number {
-        var pot = 0;
+        let pot = 0;
 
         this.bets.forEach((element) => {
             pot += element.bet;
@@ -112,8 +112,8 @@ export default class GameManager {
     }
 
     private getNextPlayerById(lastPlayer: number): number {
-        var nextPlayer: number | null = null;
-        var currentId: number = lastPlayer + 1;
+        let nextPlayer: number | null = null;
+        let currentId: number = lastPlayer + 1;
 
         do {
             if(Cache.getInstance().getHighestId() < currentId) {
@@ -126,7 +126,7 @@ export default class GameManager {
             }
 
             if(Cache.getInstance().getClientCacheById(currentId)!.chips > 0 
-            && Cache.getInstance().getClientCacheById(currentId)?.status == MemberStatus.ON) {
+            && Cache.getInstance().getClientCacheById(currentId)!.status == MemberStatus.ON) {
                 nextPlayer = currentId;
             }
 

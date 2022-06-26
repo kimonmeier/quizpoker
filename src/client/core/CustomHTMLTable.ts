@@ -11,7 +11,7 @@ export default class CustomHTMLTable {
 
     public addHeaders(... headers: TableHeader[]): void {
         this.headers = new Array(headers.length);
-        let row = this.htmlTable.createTHead().insertRow(0);
+        const row = this.htmlTable.createTHead().insertRow(0);
 
         for (let index = 0; index < headers.length; index++) {
             const element = headers[index];
@@ -34,12 +34,12 @@ export default class CustomHTMLTable {
             this.htmlTable.createTBody();
         }
 
-        let row: HTMLTableRowElement = this.htmlTable.tBodies[0].insertRow();
+        const row: HTMLTableRowElement = this.htmlTable.tBodies[0].insertRow();
 
         row.classList.add(value)
 
         objects.forEach(element => {
-            let cell: HTMLTableCellElement = row.insertCell();
+            const cell: HTMLTableCellElement = row.insertCell();
 
             if(instanceOfRowHeader(element)) {
                 if(element.click) {
@@ -61,7 +61,7 @@ export default class CustomHTMLTable {
     }
 
     public clearRows(): void {
-        var tableBody = this.htmlTable.tBodies[0];
+        const tableBody = this.htmlTable.tBodies[0];
 
         for (let index = 0; index < tableBody.rows.length;) {
             tableBody.deleteRow(index);
@@ -69,7 +69,7 @@ export default class CustomHTMLTable {
     }
 
     public deleteRow(index: number): void {
-        var tableBody = this.htmlTable.tBodies[0];
+        const tableBody = this.htmlTable.tBodies[0];
 
         tableBody.deleteRow(index);
     }
@@ -79,13 +79,13 @@ export default class CustomHTMLTable {
     }
 
     public getRow(index: number): HTMLTableRowElement {
-        var tableBody = this.htmlTable.tBodies[0];
+        const tableBody = this.htmlTable.tBodies[0];
         
         return tableBody.rows[index];
     }
 
     public getRows(): HTMLTableRowElement[] {
-        var tableBody = this.htmlTable.tBodies[0];
+        const tableBody = this.htmlTable.tBodies[0];
         
         const rows: HTMLTableRowElement[] = [];
         for (let index = 0; true; index++) {
@@ -104,7 +104,7 @@ export default class CustomHTMLTable {
     }
 
     public getRowByValue(value: string): HTMLTableRowElement | null {
-        var rowToReturn: HTMLTableRowElement | null = null;
+        let rowToReturn: HTMLTableRowElement | null = null;
         const tableBody = this.htmlTable.tBodies[0];
         
         for (let index = 0; index < tableBody.rows.length; index++) {
@@ -118,14 +118,14 @@ export default class CustomHTMLTable {
         return rowToReturn;
     }
 
-    public editRowValueByValue(rowId: string, cellName: string, newValue: string, disabledOnClick: boolean = false) {
-        var row: HTMLTableRowElement | null = this.getRowByValue(rowId);
+    public editRowValueByValue(rowId: string, cellName: string, newValue: string, disabledOnClick = false) {
+        const row: HTMLTableRowElement | null = this.getRowByValue(rowId);
 
         if(row == null) {
             return;
         }
 
-        let cellIndex: number = -1;
+        let cellIndex = -1;
         this.headers.forEach((value) => {
             if(value[1] == cellName) {
                 cellIndex = value[0];
@@ -141,14 +141,14 @@ export default class CustomHTMLTable {
         }
     }
     
-    public editRowValueByIdx(rowIdx: number, cellName: string, newValue: string, disabledOnClick: boolean = false) {
-        var row: HTMLTableRowElement | null = this.getRow(rowIdx);
+    public editRowValueByIdx(rowIdx: number, cellName: string, newValue: string, disabledOnClick = false) {
+        const row: HTMLTableRowElement | null = this.getRow(rowIdx);
 
         if(row == null) {
             return;
         }
 
-        let cellIndex: number = -1;
+        let cellIndex = -1;
         this.headers.forEach((value) => {
             if(value[1] == cellName) {
                 cellIndex = value[0];
@@ -171,7 +171,7 @@ export default class CustomHTMLTable {
             return;
         }
 
-        let cellIndex: number = -1;
+        let cellIndex = -1;
         this.headers.forEach((value) => {
             if(value[1] == cellName) {
                 cellIndex = value[0];

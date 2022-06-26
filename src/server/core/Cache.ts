@@ -1,6 +1,5 @@
 import WebSocketClient from "@server/connection/WebSocketClient";
 import { MemberStatus } from "@shared/message/ServerMessage";
-import ArrayHelper from "@shared/utils/ArrayUtils";
 import * as fragen from "./frage.json";
 
 export default class Cache {
@@ -25,7 +24,7 @@ export default class Cache {
 
     public loadFragen(): void {
         for(const element in fragen) {
-            const current = fragen[element];
+            const current: any = fragen[element];
 
             this.fragen.push({
                 frage: current.Frage,
@@ -54,7 +53,7 @@ export default class Cache {
     }
 
     public getUnusedFragen(): Frage {
-        const currentFrage = this.fragen.filter(x => !x.used)[0];;
+        const currentFrage = this.fragen.filter(x => !x.used)[0];
         this.currentFrage = currentFrage;
         return currentFrage;
     }
@@ -99,7 +98,7 @@ export default class Cache {
     }
 
     public removeClient(id: number): void {
-        this.clients = this.clients.filter(function(value, index, arr){ 
+        this.clients = this.clients.filter(function(value){ 
             return value[0] != id;
         });
     }
@@ -131,7 +130,7 @@ export default class Cache {
     }
 
     public getHighestId(): number {
-        var highestId = 0;
+        let highestId = 0;
 
         for (let index = 0; index < this.clients.length; index++) {
             const element = this.clients[index];

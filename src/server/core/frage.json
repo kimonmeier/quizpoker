@@ -1,92 +1,105 @@
 [
-    {
-        "Frage": "Wie viele Milchzähne bekommt ein Kind normalerweise?",
-        "Hinweis_1": "Ein erwachsener Mensch hat im Durchschnitt 12 Zähne mehr",
-        "Hinweis_2": "In Japan bezeichnet es traditionell das Lebensalter der Volljährigkeit",
-        "Antwort": "20"
-    },
-    {
-        "Frage": "Folgt man dem Äquator um die Welt, legt man wie viele Kilometer zurück?",
-        "Hinweis_1": "Der Mond ist ca. 10 mal weiter entfernt",
-        "Hinweis_2": "Die gleiche Entfernung legt man zurück, wenn man 10 Mal von Hamburg nach München fährt",
-        "Antwort": "40070",
-        "Einheit": "Kilometer"
-    },
-    {
-        "Frage": "In welchem Jahr wurde der Euro als Bargeld eingeführt?",
-        "Hinweis_1": "Die D-Mark wurde 1999 durch den Euro als Buchgeld abgelöst",
-        "Hinweis_2": "Die Zahl ist eine sogennante Spiegelzahl",
-        "Antwort": "2002"
-    },
-    {
-        "Frage": "Wie viele Oscars gewann der Film „Titanic“?",
-        "Hinweis_1": "Der Film wurde 14 mal nominiert",
-        "Hinweis_2": "Der Film hat mehr als die Hälfte von allen Auszeichnungen erhalten",
-        "Antwort": "11"
-    },
-    {
-        "Frage": "Wie lang ist die Chinesische Mauer?",
-        "Hinweis_1": "Sie ist länger als de Strecke von Berlin nach Istanbul",
-        "Hinweis_2": "Die Länge wurde 2012 durch neue Erktnisse von 8'000 km auf die gesuchte Zahl erhöht",
-        "Antwort": "21000",
-        "Einheit": "Kilometer"
-    },
-    {
-        "Frage": "Wie viele Tasten hat ein Klavier?",
-        "Hinweis_1": "Die Zahl ist eine sogennante Spiegelzahl",
-        "Hinweis_2": "Die Zahl wurde durch den 2ten Weltkrieg geprägt",
-        "Antwort": "88"
-    },
-    {
-        "Frage": "In welchem Jahr ist die Titanic auf ihrer Jungfernfahrt von Southampton im Atlantik gesunken?",
-        "Hinweis_1": "In diesem Jahr fand wurde die Droge MDMA erfunden.",
-        "Hinweis_2": "In diesem Jahr fand der Italienisch-Türkische Krieg im Mittelmeer statt",
-        "Antwort": "1912"
-    },
-    {
-        "Frage": "Wie viele Knochen hat ein Erwachsenenkörper?",
-        "Hinweis_1": "Im Strafgesetzbuch steht unter diesem Artikel \"Verletzung des Post- oder Fernmeldegeheimnisses\"",
-        "Hinweis_2": "Ein Auto bei Peugeot trägt diesen Zahl im Namen und wurde über 10 Mil. Mal verkauft.",
-        "Antwort": "206"
-    },
-    {
-        "Frage": "Wie viele Liter Bier werden in Deutschland pro Kopf jährlich getrunken?",
-        "Hinweis_1": "Es gibt eine Serie, welche die Zahl in ihrem Namen trägt",
-        "Hinweis_2": "Jährlich werden mehr als 8 Milliarden Liter Bier getrunken in gesamt Deutschland",
-        "Antwort": "100"
-    },
-    {
-        "Frage": "Wie lange hat Goethe an seinem „Faust“ gearbeitet?",
-        "Hinweis_1": "Die Zahl kann durch 7 verschiedene Zahlen geteilt werden",
-        "Hinweis_2": "Nintendo hat eine Konsole, welche die gesuchte Zahl im Namen trägt",
-        "Antwort": "64",
-        "Einheit": "Jahre"
-    },
-    {
-        "Frage": "Aus wie vielen Kräutern ist Jägermeister gemacht?",
-        "Hinweis_1": "Es sind weniger als 100 verschiedene Kräuter",
-        "Hinweis_2": "Die Quadratzahl der gesuchten Zahl ist 3'136",
-        "Antwort": "56"
-    },
-    {
-        "Frage": "Wie viel wog der schwerste Mensch der Welt?",
-        "Hinweis_1": "Er war ca. 300 kg leichter als ein Formel 1 Auto",
-        "Hinweis_2": "18 durchschnittliche Kinder im Alter von 10 Jahren sind gleich schwer",
-        "Antwort": "544",
-        "Einheit": "Kilogramm"
-    },
-    {
-        "Frage": "Wie viele Dialekte gibt es in Europa?",
-        "Hinweis_1": "In Deutschland gibt es 20 Dialektgruppen.",
-        "Hinweis_2": "Die meisten Dialekte gibt es in Papua Neuguinea.",
-        "Antwort": "500",
-        "Einheit": "Dialekte"
-    },
-    {
-        "Frage": "Wie gross ist der grösste Hund der Welt?",
-        "Hinweis_1": "Der grösste Hund der Welt wiegt 155Kg.",
-        "Hinweis_2": "Der grösste Hund der Welt ist grösser als Besitzer.",
-        "Antwort": "2.3",
-        "Einheit": "Meter"
-    }
-]
+	{
+		Frage: "Wie viele Milchzähne bekommt ein Kind normalerweise?",
+		Hinweis_1: "Ein erwachsener Mensch hat im Durchschnitt 12 Zähne mehr",
+		Hinweis_2:
+			"In Japan bezeichnet es traditionell das Lebensalter der Volljährigkeit",
+		Antwort: "20",
+	},
+	{
+		Frage:
+			"Folgt man dem Äquator um die Welt, legt man wie viele Kilometer zurück?",
+		Hinweis_1: "Der Mond ist ca. 10 mal weiter entfernt",
+		Hinweis_2:
+			"Die gleiche Entfernung legt man zurück, wenn man 10 Mal von Hamburg nach München fährt",
+		Antwort: "40070",
+		Einheit: "Kilometer",
+	},
+	{
+		Frage: "In welchem Jahr wurde der Euro als Bargeld eingeführt?",
+		Hinweis_1: "Die D-Mark wurde 1999 durch den Euro als Buchgeld abgelöst",
+		Hinweis_2: "Die Zahl ist eine sogennante Spiegelzahl",
+		Antwort: "2002",
+	},
+	{
+		Frage: "Wie viele Oscars gewann der Film „Titanic“?",
+		Hinweis_1: "Der Film wurde 14 mal nominiert",
+		Hinweis_2:
+			"Der Film hat mehr als die Hälfte von allen Auszeichnungen erhalten",
+		Antwort: "11",
+	},
+	{
+		Frage: "Wie lang ist die Chinesische Mauer?",
+		Hinweis_1: "Sie ist länger als de Strecke von Berlin nach Istanbul",
+		Hinweis_2:
+			"Die Länge wurde 2012 durch neue Erktnisse von 8'000 km auf die gesuchte Zahl erhöht",
+		Antwort: "21000",
+		Einheit: "Kilometer",
+	},
+	{
+		Frage: "Wie viele Tasten hat ein Klavier?",
+		Hinweis_1: "Die Zahl ist eine sogennante Spiegelzahl",
+		Hinweis_2: "Die Zahl wurde durch den 2ten Weltkrieg geprägt",
+		Antwort: "88",
+	},
+	{
+		Frage:
+			"In welchem Jahr ist die Titanic auf ihrer Jungfernfahrt von Southampton im Atlantik gesunken?",
+		Hinweis_1: "In diesem Jahr fand wurde die Droge MDMA erfunden.",
+		Hinweis_2:
+			"In diesem Jahr fand der Italienisch-Türkische Krieg im Mittelmeer statt",
+		Antwort: "1912",
+	},
+	{
+		Frage: "Wie viele Knochen hat ein Erwachsenenkörper?",
+		Hinweis_1:
+			'Im Strafgesetzbuch steht unter diesem Artikel "Verletzung des Post- oder Fernmeldegeheimnisses"',
+		Hinweis_2:
+			"Ein Auto bei Peugeot trägt diesen Zahl im Namen und wurde über 10 Mil. Mal verkauft.",
+		Antwort: "206",
+	},
+	{
+		Frage:
+			"Wie viele Liter Bier werden in Deutschland pro Kopf jährlich getrunken?",
+		Hinweis_1: "Es gibt eine Serie, welche die Zahl in ihrem Namen trägt",
+		Hinweis_2:
+			"Jährlich werden mehr als 8 Milliarden Liter Bier getrunken in gesamt Deutschland",
+		Antwort: "100",
+	},
+	{
+		Frage: "Wie lange hat Goethe an seinem „Faust“ gearbeitet?",
+		Hinweis_1: "Die Zahl kann durch 7 verschiedene Zahlen geteilt werden",
+		Hinweis_2:
+			"Nintendo hat eine Konsole, welche die gesuchte Zahl im Namen trägt",
+		Antwort: "64",
+		Einheit: "Jahre",
+	},
+	{
+		Frage: "Aus wie vielen Kräutern ist Jägermeister gemacht?",
+		Hinweis_1: "Es sind weniger als 100 verschiedene Kräuter",
+		Hinweis_2: "Die Quadratzahl der gesuchten Zahl ist 3'136",
+		Antwort: "56",
+	},
+	{
+		Frage: "Wie viel wog der schwerste Mensch der Welt?",
+		Hinweis_1: "Er war ca. 300 kg leichter als ein Formel 1 Auto",
+		Hinweis_2:
+			"18 durchschnittliche Kinder im Alter von 10 Jahren sind gleich schwer",
+		Antwort: "544",
+		Einheit: "Kilogramm",
+	},
+	{
+		Frage: "Wie viele Dialekte gibt es in Europa?",
+		Hinweis_1: "In Deutschland gibt es 20 Dialektgruppen.",
+		Hinweis_2: "Die meisten Dialekte gibt es in Papua Neuguinea.",
+		Antwort: "500",
+		Einheit: "Dialekte",
+	},
+	{
+		Frage: "Wie gross ist der grösste Hund der Welt?",
+		Hinweis_1: "Der grösste Hund der Welt wiegt 155Kg.",
+		Hinweis_2: "Der grösste Hund der Welt ist grösser als Besitzer.",
+		Antwort: "2.3",
+		Einheit: "Meter",
+	},
+];

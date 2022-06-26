@@ -1,6 +1,6 @@
 export default class StringHelper {
     public static isNullOrEmpty(text: string)  {
-        if(!!text) {
+        if(text) {
             return true;
         }
 

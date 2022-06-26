@@ -1,10 +1,7 @@
-import { PlayerRole } from "../../shared/enums/PlayerRole";
 import { ClientEvents } from "../../shared/enums/ClientEvents";
 import { ServerEvents } from "../../shared/enums/ServerEvents";
 import { MemberAction } from "../../shared/message/ClientMessage";
-import { FragenPhase, MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
-import WebSocketClient from "../connection/WebSocketClient";
-import CustomHTMLTable, { HighlightColor } from "./CustomHTMLTable";
+import { MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
 import { SharedApp } from "./Shared";
 
 const roundToNearest5 = (x: number) => Math.round(x/50)*50;
@@ -41,9 +38,7 @@ export default class App extends SharedApp {
     }
 
     protected override registerListener(): void {
-        this.raiseRangeInput.oninput = (e: Event) => {
-            this.raiseTextInput.value = this.raiseRangeInput.value;
-        };
+        this.raiseRangeInput.oninput = (e: Event) => this.raiseTextInput.value = this.raiseRangeInput.value;
 
         this.raiseTextInput.oninput = (e: Event) => {
             let currentNumber: number = Number.parseInt(this.raiseTextInput.value); 
