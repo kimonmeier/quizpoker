@@ -1,121 +1,156 @@
 import { ServerEvents } from "@shared/enums/ServerEvents";
 
 interface PingServerEvent {
-    type: ServerEvents.PING;
-    ms: number;
+	type: ServerEvents.PING;
+	ms: number;
 }
 
 interface NewMemberEvent {
-    type: ServerEvents.NEW_MITGLIED;
-    name: string;
-    link: string;
-    id: number;
+	type: ServerEvents.NEW_MITGLIED;
+	name: string;
+	id: number;
 }
 
 interface MemberSelectedEvent {
-    type: ServerEvents.MITGLIED_SELECTED,
-    id: number
+	type: ServerEvents.MITGLIED_SELECTED;
+	id: number;
 }
 
 interface RemoveMemberEvent {
-    type: ServerEvents.REMOVED_MITGLIED,
-    id:number
+	type: ServerEvents.REMOVED_MITGLIED;
+	id: number;
 }
 
 interface MemberKickEvent {
-    type: ServerEvents.MEMBER_KICK,
-    id: number
+	type: ServerEvents.MEMBER_KICK;
+	id: number;
 }
 
 interface MemberUpdateValuesEvent {
-    type: ServerEvents.UPDATED_MITGLIED_VALUES,
-    id: number,
-    chips: number,
-    einsatz: number,
-    hasControls: boolean,
-    status: MemberStatus
+	type: ServerEvents.UPDATED_MITGLIED_VALUES;
+	id: number;
+	chips: number;
+	einsatz: number;
+	hasControls: boolean;
+	status: MemberStatus;
 }
 
 interface GameUpdatedValuesEvent {
-    type: ServerEvents.UPDATED_GAME_VALUES,
-    pot: number,
-    phase: GamePhase
+	type: ServerEvents.UPDATED_GAME_VALUES;
+	pot: number;
+	phase: GamePhase;
 }
 
 interface NextQuestionEvent {
-    type: ServerEvents.NAECHSTE_FRAGE,
-    phase: FragenPhase.FRAGE
-    frage: string,
-    einheit: string
+	type: ServerEvents.NAECHSTE_FRAGE;
+	phase: FragenPhase.FRAGE;
+	frage: string;
+	einheit: string;
 }
 
 interface NextPhaseEvent {
-    type: ServerEvents.NAECHSTE_PHASE
-    phase: FragenPhase,
-    hinweis: string
+	type: ServerEvents.NAECHSTE_PHASE;
+	phase: FragenPhase;
+	hinweis: string;
 }
 interface SuccesFullLoginEvent {
-    type: ServerEvents.MITGLIED_SUCCESSFULL_LOGIN,
-    id: number;
+	type: ServerEvents.MITGLIED_SUCCESSFULL_LOGIN;
+	id: number;
 }
 
 interface GameStartedEvent {
-    type: ServerEvents.GAME_STARTED
+	type: ServerEvents.GAME_STARTED;
 }
 
 interface GameMasterQuestionEvent {
-    type: ServerEvents.GAME_MASTER_QUESTION,
-    question: string,
-    hinweis1: string,
-    hinweis2: string,
-    answer: string,
-    einheit: string
+	type: ServerEvents.GAME_MASTER_QUESTION;
+	question: string;
+	hinweis1: string;
+	hinweis2: string;
+	answer: string;
+	einheit: string;
 }
 
 interface MemberIssuedSchaetzungEvent {
-    type: ServerEvents.MEMBER_ISSUED_SCHAETZUNG,
-    id: number,
-    schaetzung: string,
+	type: ServerEvents.MEMBER_ISSUED_SCHAETZUNG;
+	id: number;
+	schaetzung: string;
 }
 
 interface PlayerControlEvent {
-    type: ServerEvents.PLAYER_HAS_CONTROLS,
-    member_id: number,
-    minimumBet: number;
+	type: ServerEvents.PLAYER_HAS_CONTROLS;
+	member_id: number;
+	minimumBet: number;
 }
 
 interface PlayerWonEvent {
-    type: ServerEvents.PLAYER_WON,
-    id: number,
-    chips: number;
+	type: ServerEvents.PLAYER_WON;
+	id: number;
+	chips: number;
 }
 
 interface ShowSchaetzungEvent {
-    type: ServerEvents.SHOW_SCHAETZUNG,
-    id: number,
-    schaetzung: number,
+	type: ServerEvents.SHOW_SCHAETZUNG;
+	id: number;
+	schaetzung: number;
+}
+
+interface WebRtcAnswerEvent {
+	type: ServerEvents.WEBRTC_ANSWER_RECIEVED;
+	source_member_id: number;
+	answer: RTCSessionDescriptionInit;
+}
+
+interface WebRtcOfferRecievedEvent {
+	type: ServerEvents.WEBRTC_OFFER_RECIEVED;
+	id: number;
+	offer: RTCSessionDescriptionInit;
+}
+
+interface WebRtcIceCandidate {
+	type: ServerEvents.WEBRTC_NEW_CANDIDATE;
+	source_member_id: number;
+	candidate: RTCIceCandidate;
 }
 
 export enum FragenPhase {
-    FRAGE = "Frage",
-    RUNDE_1 = "Hinweis_1",
-    RUNDE_2 = "Hinweis_2",
-    ANTWORT = "Antwort",
-    PAUSE = "Pause"
+	FRAGE = "Frage",
+	RUNDE_1 = "Hinweis_1",
+	RUNDE_2 = "Hinweis_2",
+	ANTWORT = "Antwort",
+	PAUSE = "Pause",
 }
 
 export enum GamePhase {
-    START,
-    ROUND,
-    PAUSE,
-    END
+	START,
+	ROUND,
+	PAUSE,
+	END,
 }
 
 export enum MemberStatus {
-    ON,
-    FOLDED,
-    PLEITE
+	ON,
+	FOLDED,
+	PLEITE,
 }
 
-
-export type ServerMessage = PlayerControlEvent | MemberIssuedSchaetzungEvent | GameMasterQuestionEvent | GameStartedEvent | PingServerEvent | NewMemberEvent | MemberSelectedEvent | RemoveMemberEvent | MemberUpdateValuesEvent | GameUpdatedValuesEvent | NextQuestionEvent | NextPhaseEvent | SuccesFullLoginEvent | PlayerWonEvent | ShowSchaetzungEvent | MemberKickEvent;
+export type ServerMessage =
+	| PlayerControlEvent
+	| MemberIssuedSchaetzungEvent
+	| GameMasterQuestionEvent
+	| GameStartedEvent
+	| PingServerEvent
+	| NewMemberEvent
+	| MemberSelectedEvent
+	| RemoveMemberEvent
+	| MemberUpdateValuesEvent
+	| GameUpdatedValuesEvent
+	| NextQuestionEvent
+	| NextPhaseEvent
+	| SuccesFullLoginEvent
+	| PlayerWonEvent
+	| ShowSchaetzungEvent
+	| MemberKickEvent
+	| WebRtcAnswerEvent
+	| WebRtcOfferRecievedEvent
+	| WebRtcIceCandidate;

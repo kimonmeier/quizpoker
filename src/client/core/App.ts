@@ -1,242 +1,293 @@
+import { domainToUnicode } from "url";
 import { ClientEvents } from "../../shared/enums/ClientEvents";
 import { ServerEvents } from "../../shared/enums/ServerEvents";
 import { MemberAction } from "../../shared/message/ClientMessage";
-import { MemberStatus, ServerMessage } from "../../shared/message/ServerMessage";
+import {
+	MemberStatus,
+	ServerMessage,
+} from "../../shared/message/ServerMessage";
 import { SharedApp } from "./Shared";
 
-const roundToNearest5 = (x: number) => Math.round(x/50)*50;
+const roundToNearest5 = (x: number) => Math.round(x / 50) * 50;
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    App.getInstance().startApp();
-}); 
+	App.getInstance().startApp();
+});
 
 window.onbeforeunload = (ev: Event) => {
-    App.getInstance().stopApp();
-}
+	App.getInstance().stopApp();
+};
 
 export default class App extends SharedApp {
-    private static instance: App;
+	private static instance: App;
 
-    public static getInstance(): App {
-        if(App.instance == undefined) {
-            new App();
-        }
+	public static getInstance(): App {
+		if (App.instance == undefined) {
+			new App();
+		}
 
-        return App.instance;
-    }
+		return App.instance;
+	}
 
-    private schaetzungTextInput!: HTMLInputElement;
-    private raiseTextInput!: HTMLInputElement;
-    private raiseRangeInput!: HTMLInputElement;
+	private schaetzungTextInput!: HTMLInputElement;
+	private raiseTextInput!: HTMLInputElement;
+	private raiseRangeInput!: HTMLInputElement;
 
-    private isInControl: boolean = false;
-    private memberStatus: MemberStatus = MemberStatus.ON;
+	private isInControl: boolean = false;
+	private memberStatus: MemberStatus = MemberStatus.ON;
 
-    private constructor() {
-        super();
-        App.instance = this;
-    }
+	private constructor() {
+		super();
+		App.instance = this;
+	}
 
-    protected override registerListener(): void {
-        this.raiseRangeInput.oninput = (e: Event) => this.raiseTextInput.value = this.raiseRangeInput.value;
+	protected override shouldProvideTrack(): boolean {
+		return true;
+	}
 
-        this.raiseTextInput.oninput = (e: Event) => {
-            let currentNumber: number = Number.parseInt(this.raiseTextInput.value); 
-            if(this.raiseTextInput.value.length == 0) {
-                currentNumber = 0;
-            } else if(Number.isNaN(+this.raiseTextInput.value)) {
-                this.raiseTextInput.value = this.raiseRangeInput.value;
-                return;
-            }
-            
-            if(this.raiseTextInput.value.length == 0) {
-                currentNumber = 0;
-            } else if(this.raiseTextInput.value.length > 2) {
-                currentNumber = roundToNearest5(currentNumber);
-            } 
-            if(currentNumber >= this.maxChips) {
-               currentNumber = this.maxChips;
-            } 
+	protected override registerListener(): void {
+		this.raiseRangeInput.oninput = (e: Event) =>
+			(this.raiseTextInput.value = this.raiseRangeInput.value);
 
-            this.raiseRangeInput.value = currentNumber.toString();
-            this.raiseTextInput.value = currentNumber.toString();
-        }
+		this.raiseTextInput.oninput = (e: Event) => {
+			let currentNumber: number = Number.parseInt(this.raiseTextInput.value);
+			if (this.raiseTextInput.value.length == 0) {
+				currentNumber = 0;
+			} else if (Number.isNaN(+this.raiseTextInput.value)) {
+				this.raiseTextInput.value = this.raiseRangeInput.value;
+				return;
+			}
 
-        this.schaetzungTextInput.oninput = (e: Event) => {
-            let currentNumber: number = Number.parseInt(this.schaetzungTextInput.value); 
+			if (this.raiseTextInput.value.length == 0) {
+				currentNumber = 0;
+			} else if (this.raiseTextInput.value.length > 2) {
+				currentNumber = roundToNearest5(currentNumber);
+			}
+			if (currentNumber >= this.maxChips) {
+				currentNumber = this.maxChips;
+			}
 
-            if(Number.isNaN(currentNumber)) {
-                currentNumber = 0;
-            }
+			this.raiseRangeInput.value = currentNumber.toString();
+			this.raiseTextInput.value = currentNumber.toString();
+		};
 
-            this.schaetzungTextInput.value = currentNumber.toString();
-        }
+		this.schaetzungTextInput.oninput = (e: Event) => {
+			let currentNumber: number = Number.parseInt(
+				this.schaetzungTextInput.value
+			);
 
-        document.getElementById("btnLogin")!.onclick = (event) => {
-            const text = (document.getElementById("name")! as HTMLInputElement).value;
-            const link = (document.getElementById("url")! as HTMLInputElement).value;
+			if (Number.isNaN(currentNumber)) {
+				currentNumber = 0;
+			}
 
-            this.client.send({ 
-                type: ClientEvents.MEMBER_LOGIN,
-                name: text,
-                link: link
-            });
-        };
+			this.schaetzungTextInput.value = currentNumber.toString();
+		};
 
-        document.getElementById("btnSubmitSchaetzung")!.onclick = (event) => {
-            this.disableSchaetzungen(true, true);
-            
-            var text = App.getInstance().schaetzungTextInput.value;
+		document.getElementById("btnLogin")!.onclick = (event) => {
+			const text = (document.getElementById("name")! as HTMLInputElement).value;
+			const cam = (document.getElementById("cams")! as HTMLInputElement).value;
 
-            this.client.send({
-                type: ClientEvents.SCHAETZUNG_ABGEBEN,
-                id: App.getInstance().id,
-                schaetzung: Number.parseInt(text)
-            });
-        }
+			this.client.send({
+				type: ClientEvents.MEMBER_LOGIN,
+				name: text,
+			});
+		};
 
-        document.getElementById("btnRaise")!.onclick = (event) => {
-            this.client.send({
-                type: ClientEvents.MITGLIED_ACTION,
-                action: MemberAction.RAISE,
-                value: Number.parseInt(this.raiseTextInput.value)
-            })
-        }
+		document.getElementById("btnSubmitSchaetzung")!.onclick = (event) => {
+			this.disableSchaetzungen(true, true);
 
-        
-        document.getElementById("btnCall")!.onclick = (event) => {
-            this.client.send({
-                type: ClientEvents.MITGLIED_ACTION,
-                action: MemberAction.CALL,
-                value: 0
-            })
-        }
+			var text = App.getInstance().schaetzungTextInput.value;
 
-        
-        document.getElementById("btnFold")!.onclick = (event) => {
-            this.client.send({
-                type: ClientEvents.MITGLIED_ACTION,
-                action: MemberAction.FOLD,
-                value: 0
-            })
-        }
-    }
+			this.client.send({
+				type: ClientEvents.SCHAETZUNG_ABGEBEN,
+				id: App.getInstance().id,
+				schaetzung: Number.parseInt(text),
+			});
+		};
 
-    protected override disableInputsAtBeginning(): void {
-        this.disableInputs(true, false);
-        this.disableSchaetzungen(true, false);
-    }
-    
-    protected override declareVariables(): void {
-        super.declareVariables();
+		document.getElementById("btnRaise")!.onclick = (event) => {
+			this.client.send({
+				type: ClientEvents.MITGLIED_ACTION,
+				action: MemberAction.RAISE,
+				value: Number.parseInt(this.raiseTextInput.value),
+			});
+		};
 
-        this.raiseTextInput = document.getElementById("raisetext") as HTMLInputElement;
-        this.raiseRangeInput = document.getElementById("raiserange") as HTMLInputElement;
-        this.schaetzungTextInput = document.getElementById("schaetzungText") as HTMLInputElement;
-    }
+		document.getElementById("btnCall")!.onclick = (event) => {
+			this.client.send({
+				type: ClientEvents.MITGLIED_ACTION,
+				action: MemberAction.CALL,
+				value: 0,
+			});
+		};
 
-    private disableSchaetzungen(locked: boolean, visible: boolean): void {
-        document.getElementById("schaetzung")!.hidden = !visible;
-        if(locked) {
-            $("#schaetzung").find("button, input").attr("disabled", "disabled");
-        } else {
-            $("#schaetzung").find("button, input").removeAttr("disabled");
-        }
-    }
+		document.getElementById("btnFold")!.onclick = (event) => {
+			this.client.send({
+				type: ClientEvents.MITGLIED_ACTION,
+				action: MemberAction.FOLD,
+				value: 0,
+			});
+		};
 
-    private disableInputs(locked: boolean, allIn: boolean): void {
-        if(locked) {
-            $("#game-controls").find("button, input").attr("disabled", "disabled");
-        } else {
-            $("#game-controls").find("button, input").removeAttr("disabled");
+		(document.getElementById("cams") as HTMLSelectElement).addEventListener(
+			"change",
+			(event) => {
+				this.deviceId = (
+					document.getElementById("cams") as HTMLSelectElement
+				).value;
 
-            if(allIn) {
-                $("#btnRaise").attr("disabled", "disabled");
-            }
-        }
-    }
+				navigator.mediaDevices
+					.getUserMedia({
+						video: {
+							deviceId: this.deviceId,
+						},
+					})
+					.then((x) => {
+						(
+							document.getElementById("previewCam") as HTMLVideoElement
+						).srcObject = x;
+					});
+			}
+		);
+	}
 
-    private setId(id: number): void {
-        this.id = id;
+	protected override disableInputsAtBeginning(): void {
+		this.disableInputs(true, false);
+		this.disableSchaetzungen(true, false);
+	}
 
-        document.getElementById("btnLogin")!.hidden = true;
+	protected override declareVariables(): void {
+		super.declareVariables();
 
-        document.getElementById("loginAlert")!.hidden = false;
-    }
+		this.raiseTextInput = document.getElementById(
+			"raisetext"
+		) as HTMLInputElement;
+		this.raiseRangeInput = document.getElementById(
+			"raiserange"
+		) as HTMLInputElement;
+		this.schaetzungTextInput = document.getElementById(
+			"schaetzungText"
+		) as HTMLInputElement;
 
-    private visibleControls(): void {
-        document.getElementById("login")!.hidden = true;
-        document.getElementById("play")!.hidden = false;
-    }
+		navigator.mediaDevices.enumerateDevices().then((x) => {
+			x.forEach((device) => {
+				if (device.deviceId == "") {
+					return;
+				}
+				const option = document.createElement("option") as HTMLOptionElement;
+				option.id = device.deviceId;
+				option.value = device.deviceId;
+				option.text = device.label;
 
-    private setLastBet(lastBet: number): void {
-        this.raiseRangeInput.min = (lastBet + 50).toString();
-        this.raiseTextInput.value = (lastBet + 50).toString();
-    }
+				(document.getElementById("cams") as HTMLSelectElement).add(option);
+			});
+		});
+	}
 
-    private setMaxChips(maxChips: number): void {
-        this.maxChips = maxChips;
+	private disableSchaetzungen(locked: boolean, visible: boolean): void {
+		document.getElementById("schaetzung")!.hidden = !visible;
+		if (locked) {
+			$("#schaetzung").find("button, input").attr("disabled", "disabled");
+		} else {
+			$("#schaetzung").find("button, input").removeAttr("disabled");
+		}
+	}
 
-        this.raiseRangeInput.max = maxChips.toString();
-    }
+	private disableInputs(locked: boolean, allIn: boolean): void {
+		if (locked) {
+			$("#game-controls").find("button, input").attr("disabled", "disabled");
+		} else {
+			$("#game-controls").find("button, input").removeAttr("disabled");
 
-    private setHasControls(setHasControls: boolean, minimumBet: number): void {
-        this.isInControl = setHasControls;
+			if (allIn) {
+				$("#btnRaise").attr("disabled", "disabled");
+			}
+		}
+	}
 
-        if(this.isInControl) {
-            this.setLastBet(minimumBet);
-        }
+	private setId(id: number): void {
+		this.id = id;
 
-        this.disableInputs(!this.isInControl, minimumBet >= this.maxChips);
+		document.getElementById("btnLogin")!.hidden = true;
 
-        
-        if(minimumBet >= this.maxChips) {
-            document.getElementById("btnCall")!.innerText = "All-In";
-        } else {
-            document.getElementById("btnCall")!.innerText = "Call";
-        }
+		document.getElementById("loginAlert")!.hidden = false;
+	}
 
-    }
+	private visibleControls(): void {
+		document.getElementById("login")!.hidden = true;
+		document.getElementById("play")!.hidden = false;
+	}
 
-    protected override recieve(m: ServerMessage): void {
-        super.recieve(m);
+	private setLastBet(lastBet: number): void {
+		this.raiseRangeInput.min = (lastBet + 50).toString();
+		this.raiseTextInput.value = (lastBet + 50).toString();
+	}
 
-        switch(m.type) {
-            case ServerEvents.UPDATED_MITGLIED_VALUES:
-                if(m.id == App.getInstance().id) {
-                    this.setMaxChips(m.chips + m.einsatz);
-                    this.memberStatus = m.status;
-                    this.setHasControls(m.hasControls, 0);
-                }
-                break;
+	private setMaxChips(maxChips: number): void {
+		this.maxChips = maxChips;
 
-            case ServerEvents.MITGLIED_SUCCESSFULL_LOGIN:
-                App.getInstance().setId(m.id);
-                break;
+		this.raiseRangeInput.max = maxChips.toString();
+	}
 
-            case ServerEvents.NAECHSTE_FRAGE:
-                if(App.getInstance().memberStatus == MemberStatus.PLEITE) {
-                    App.getInstance().disableSchaetzungen(true, true);
-                } else {
-                    App.getInstance().disableSchaetzungen(false, true);
-                }
+	private setHasControls(setHasControls: boolean, minimumBet: number): void {
+		this.isInControl = setHasControls;
 
-                break;
-            
-            case ServerEvents.PLAYER_HAS_CONTROLS:
-                App.getInstance().setHasControls(m.member_id == App.getInstance().id, m.minimumBet);
+		if (this.isInControl) {
+			this.setLastBet(minimumBet);
+		}
 
-            case ServerEvents.GAME_STARTED:
-                App.getInstance().visibleControls();
-                break;
+		this.disableInputs(!this.isInControl, minimumBet >= this.maxChips);
 
-            case ServerEvents.PLAYER_WON:
-                (document.getElementById("antwortmusik") as HTMLAudioElement).pause();
-                break;
+		if (minimumBet >= this.maxChips) {
+			document.getElementById("btnCall")!.innerText = "All-In";
+		} else {
+			document.getElementById("btnCall")!.innerText = "Call";
+		}
+	}
 
-            case ServerEvents.SHOW_SCHAETZUNG:
-                (document.getElementById(App.SCHAETZUNG_PREFIX + m.id))!.innerText = m.schaetzung.toString();
-                break;
-        }
-    }
+	protected override async recieve(m: ServerMessage): Promise<void> {
+		super.recieve(m);
+
+		switch (m.type) {
+			case ServerEvents.UPDATED_MITGLIED_VALUES:
+				if (m.id == App.getInstance().id) {
+					this.setMaxChips(m.chips + m.einsatz);
+					this.memberStatus = m.status;
+					this.setHasControls(m.hasControls, 0);
+				}
+				break;
+
+			case ServerEvents.MITGLIED_SUCCESSFULL_LOGIN:
+				App.getInstance().setId(m.id);
+				break;
+
+			case ServerEvents.NAECHSTE_FRAGE:
+				if (App.getInstance().memberStatus == MemberStatus.PLEITE) {
+					App.getInstance().disableSchaetzungen(true, true);
+				} else {
+					App.getInstance().disableSchaetzungen(false, true);
+				}
+
+				break;
+
+			case ServerEvents.PLAYER_HAS_CONTROLS:
+				App.getInstance().setHasControls(
+					m.member_id == App.getInstance().id,
+					m.minimumBet
+				);
+
+			case ServerEvents.GAME_STARTED:
+				App.getInstance().visibleControls();
+				break;
+
+			case ServerEvents.PLAYER_WON:
+				(document.getElementById("antwortmusik") as HTMLAudioElement).pause();
+				break;
+
+			case ServerEvents.SHOW_SCHAETZUNG:
+				document.getElementById(App.SCHAETZUNG_PREFIX + m.id)!.innerText =
+					m.schaetzung.toString();
+				break;
+		}
+	}
 }

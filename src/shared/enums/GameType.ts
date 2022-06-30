@@ -1,3 +1,1 @@
-export enum GameType {
-    
-}
+export enum GameType {}

@@ -1,6 +1,5 @@
 {
     "singleQuote": false,
-    "parser": "flow",
     "semi": true,
     "endOfLine": "auto",
     "useTabs": true,

@@ -1,4 +1,4 @@
 export default interface Bet {
-    player_id: number
-    bet: number
+	player_id: number;
+	bet: number;
 }
